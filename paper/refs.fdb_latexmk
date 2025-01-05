@@ -1,0 +1,12 @@
+# Fdb version 4
+["pdflatex"] 1703323855 "refs.bib" "refs.pdf" "refs" 1703323859 2
+  "/usr/local/texlive/2021/texmf-dist/web2c/texmf.cnf" 1621028613 40042 fe981136cbb5f3715ab1b0e46e3d3892 ""
+  "/usr/local/texlive/2021/texmf-var/web2c/pdftex/pdflatex.fmt" 1642374521 2796593 42747a4bf8a4e57b90e8685beded8218 ""
+  "/usr/local/texlive/2021/texmf.cnf" 1616695596 577 4c1911a7228e554c6032256d3cf5567d ""
+  "refs.aux" 1703323855 32 3985256e7290058c681f74d7a3565a19 "pdflatex"
+  "refs.bib" 1703323854 1701 d6718639ba60fbbe2a05fdc6312c13d3 ""
+  (generated)
+  "refs.aux"
+  "refs.log"
+  "refs.pdf"
+  (rewritten before read)
