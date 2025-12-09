@@ -4,7 +4,7 @@
 
 ## Information
 
-*Subject:* 
+*Subject:* Simulations of a version of the duopoly model
 
 *Language:* English
 
@@ -90,4 +90,4 @@ Description of the buying algorithm for a consumer (this is only an example):
 
 ## TODO
 
-1. Write the above simulation and run it. See if there are any problems. Does it converge? What is an average path of the simulation?
+1. Write a mathematical model, with all random variables and try to solve it. 
