@@ -90,4 +90,4 @@ Description of the buying algorithm for a consumer (this is only an example):
 
 ## TODO
 
-1. Write a mathematical model, with all random variables and try to solve it. 
+1. Write a mathematical model, with all random variables for two firms and try to do mathematical simulation. 
