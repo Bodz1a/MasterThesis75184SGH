@@ -160,7 +160,7 @@ Student's register No.: 75184
 \begin{minipage}{12cm}
 \centering
 \Large
-\textbf{Simulating firm's decisions\\in the incomplete information market}
+\textbf{Learning and Competition\\in the Differentiated Products Market}
 \end{minipage}
 
 \vspace*{2cm}
@@ -187,7 +187,17 @@ Warsaw 2026
 \cleardoublepage
 \section{Introduction}
 
-Here we have to introduce the topic, explain why the topic is interesting and how it is connected with the theoretical economics and also we need to do the literature review.
+% Here we have to introduce the topic, explain why the topic is interesting and how it is connected with the theoretical economics and also we need to do the literature review.
+
+\par Firms on real markets need to make pricing and product design decisions in diverse consumer environments with limited information. Consumers have different preferences and willingness to pay for product attributes, and firms tend not to directly see them and cannot accurately forecast demand. Rather, firms use these data over time to direct their decisions. Knowing how companies set prices and attribute products in such contexts is a central question in industrial economics and microeconomics. 
+\par Conventional economic models commonly concern firm behavior with static equilibrium models while using a strong information assumption to establish firm performance. Traditional price competition classic models assume that firms know what is needed and are solving problems analytically in order to reach the equilibrium approach. Although the theoretical contribution of these models is crucial, they lack the insights from two characteristic areas central to many real-world markets: the heterogeneity of consumer preferences and the fact that firms typically learn about demand through experimentation rather than necessarily perfect information. 
+\par This paper constructs some of the components of the structural model of consumer demand in which individual consumers vary in their willingness to pay and prefer product attributes. To compete in a market for distinctively priced goods, companies decide not just prices but also features of the products. Demand is the outcome of individual consumer choices, probabilistically dependent on price and the level of conformity of all features of the product with consumer preferences. Consequently, aggregate demand and firm profits are endogenous results of heterogeneous economic decisions at the micro level. 
+\par Because those profit functions usually do not support analytical solutions, the firms optimization problems are solved numerically. Rather than simply assuming that a firm immediately calculates equilibrium strategies, it employs a simulation-based model in which firms investigate market effects and adapt their alternatives. In both cases, the method provides an opportunity to study market behavior under a limited amount of data, whilst also serving as a bridge between theoretical demand models and algorithmic decision making. To clearly demonstrate how consumer heterogeneity affects pricing, product design and overall, the model is first devised around one firm. The model may be replicated with several firms engaged in a given market in which each firm's customer demand is uncertain in terms of the degree of uncertainty on consumers' demand and the behavior of its competitors. Under such circumstances, equilibrium results are reached by repeated interactions and learning, rather than through explicit decision making. 
+\par The thesis adds to knowledge on price and product competition in differentiated markets by applying a solid demand structure with mathematical and simulation-based solution methods. This approach is firmly rooted in economic theory, although it recognises the reality of features in real-world scenarios like learning, experimenting and incomplete information that cannot be accurately modeled with an analytical approach. For this reason, it offers a flexible basis for studying firm behavior in modern markets characterized by a range of product-based distinctions and consumer heterogeneity, hence product differentiation as a key element of study.
+
+\clearpage
+\section{Literature review}
+The place for literature review.
 
 % --- chapter ---------------------------------------------------------
 \clearpage
@@ -197,6 +207,15 @@ Here we give mathematical formulation of all models, but also for every model we
 
 \subsection{A model with a single firm}
 
+Herein, we describe a mathematical model of a market with a single firm. The model's aim is to explain how heterogeneity among consumers creates demand and how a firm will choose prices and product attributes in response to that demand. Since the resulting profit function does not admit a closed-form solution, the decision problem of the firm is analyzed using a numerical, algorithmic approach reflecting learning under incomplete information.
+
+\subsubsection{A model of an agent population}
+
+We consider a market populated by a large number N of consumers. Consumers are heterogeneous along two dimensions: Reservation price, where each $i$ consumer has a reservation price $R_i > 0$ showing the maximum price at which the consumer would buy the product, and Taste (the ideal product characteristic), where each consumer $i$ has a preferred product characteristic $S_i \in [0,1]$
+
+\subsubsection{Assumptions}
+
+We assume that Both R and S are continuously distributed and agents make independent choices.
 \subsection{A model with two firms}
 
 % --- chapter ---------------------------------------------------------
