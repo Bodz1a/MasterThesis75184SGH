@@ -1,0 +1,419 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nyt/global//global/global/global}
+    \entry{epstein1996}{book}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=f0e4dea7167c7fde8fabcf03c094007d}{%
+           family={Epstein\bibnamedelima J.M.},
+           familyi={E\bibinitperiod\bibinitdelim J\bibinitperiod},
+           given={Axtell\bibnamedelima R.},
+           giveni={A\bibinitperiod\bibinitdelim R\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Brookings Institution Press}%
+      }
+      \strng{namehash}{f0e4dea7167c7fde8fabcf03c094007d}
+      \strng{fullhash}{f0e4dea7167c7fde8fabcf03c094007d}
+      \strng{fullhashraw}{f0e4dea7167c7fde8fabcf03c094007d}
+      \strng{bibnamehash}{f0e4dea7167c7fde8fabcf03c094007d}
+      \strng{authorbibnamehash}{f0e4dea7167c7fde8fabcf03c094007d}
+      \strng{authornamehash}{f0e4dea7167c7fde8fabcf03c094007d}
+      \strng{authorfullhash}{f0e4dea7167c7fde8fabcf03c094007d}
+      \strng{authorfullhashraw}{f0e4dea7167c7fde8fabcf03c094007d}
+      \field{sortinit}{E}
+      \field{sortinithash}{8da8a182d344d5b9047633dfc0cc9131}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Growing artificial societies: Social science from the bottom up}
+      \field{year}{1996}
+    \endentry
+    \entry{hsm2019}{article}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=beda91cf772f4de363029c1923d71a6a}{%
+           family={Hahn\bibnamedelima U.},
+           familyi={H\bibinitperiod\bibinitdelim U\bibinitperiod},
+           given={Merdes\bibnamedelima C},
+           giveni={M\bibinitperiod\bibinitdelim C\bibinitperiod},
+           givenun=0,
+           suffix={Sydow\bibnamedelima M.},
+           suffixi={S\bibinitperiod\bibinitdelim M\bibinitperiod},
+           suffixun=0}}%
+      }
+      \strng{namehash}{beda91cf772f4de363029c1923d71a6a}
+      \strng{fullhash}{beda91cf772f4de363029c1923d71a6a}
+      \strng{fullhashraw}{beda91cf772f4de363029c1923d71a6a}
+      \strng{bibnamehash}{beda91cf772f4de363029c1923d71a6a}
+      \strng{authorbibnamehash}{beda91cf772f4de363029c1923d71a6a}
+      \strng{authornamehash}{beda91cf772f4de363029c1923d71a6a}
+      \strng{authorfullhash}{beda91cf772f4de363029c1923d71a6a}
+      \strng{authorfullhashraw}{beda91cf772f4de363029c1923d71a6a}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IMFI}
+      \field{title}{Topics in Cognitive Science}
+      \field{volume}{11}
+      \field{year}{2019}
+      \field{pages}{194\bibrangedash 206}
+      \range{pages}{13}
+    \endentry
+    \entry{hm1995}{article}{}{}
+      \name{author}{1}{}{%
+        {{un=1,uniquepart=given,hash=6ddbb720ad084f16e55b93d42094674b}{%
+           family={Helbing\bibnamedelima D.},
+           familyi={H\bibinitperiod\bibinitdelim D\bibinitperiod},
+           given={Mulnar\bibnamedelima P.},
+           giveni={M\bibinitperiod\bibinitdelim P\bibinitperiod},
+           givenun=1}}%
+      }
+      \strng{namehash}{6ddbb720ad084f16e55b93d42094674b}
+      \strng{fullhash}{6ddbb720ad084f16e55b93d42094674b}
+      \strng{fullhashraw}{6ddbb720ad084f16e55b93d42094674b}
+      \strng{bibnamehash}{6ddbb720ad084f16e55b93d42094674b}
+      \strng{authorbibnamehash}{6ddbb720ad084f16e55b93d42094674b}
+      \strng{authornamehash}{6ddbb720ad084f16e55b93d42094674b}
+      \strng{authorfullhash}{6ddbb720ad084f16e55b93d42094674b}
+      \strng{authorfullhashraw}{6ddbb720ad084f16e55b93d42094674b}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Physical Review E}
+      \field{title}{Social force model for pedestrian dynamics}
+      \field{volume}{51}
+      \field{year}{2000}
+      \field{pages}{4282\bibrangedash 4286}
+      \range{pages}{5}
+    \endentry
+    \entry{ht2000}{article}{}{}
+      \name{author}{1}{}{%
+        {{un=1,uniquepart=given,hash=b549bc903e1fc4e1a3092015f3d9c818}{%
+           family={Helbing\bibnamedelima D.},
+           familyi={H\bibinitperiod\bibinitdelim D\bibinitperiod},
+           given={Vicsek\bibnamedelima T.},
+           giveni={V\bibinitperiod\bibinitdelim T\bibinitperiod},
+           givenun=1}}%
+      }
+      \strng{namehash}{b549bc903e1fc4e1a3092015f3d9c818}
+      \strng{fullhash}{b549bc903e1fc4e1a3092015f3d9c818}
+      \strng{fullhashraw}{b549bc903e1fc4e1a3092015f3d9c818}
+      \strng{bibnamehash}{b549bc903e1fc4e1a3092015f3d9c818}
+      \strng{authorbibnamehash}{b549bc903e1fc4e1a3092015f3d9c818}
+      \strng{authornamehash}{b549bc903e1fc4e1a3092015f3d9c818}
+      \strng{authorfullhash}{b549bc903e1fc4e1a3092015f3d9c818}
+      \strng{authorfullhashraw}{b549bc903e1fc4e1a3092015f3d9c818}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Nature}
+      \field{title}{Simulating dynamical features of escape panic}
+      \field{volume}{407}
+      \field{year}{2000}
+      \field{pages}{487\bibrangedash 490}
+      \range{pages}{4}
+    \endentry
+    \entry{np1995}{article}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=0070952aab521a9fa55eb9e7b5a566dd}{%
+           family={Nagel\bibnamedelima K.},
+           familyi={N\bibinitperiod\bibinitdelim K\bibinitperiod},
+           given={Paczuski\bibnamedelima M.},
+           giveni={P\bibinitperiod\bibinitdelim M\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{0070952aab521a9fa55eb9e7b5a566dd}
+      \strng{fullhash}{0070952aab521a9fa55eb9e7b5a566dd}
+      \strng{fullhashraw}{0070952aab521a9fa55eb9e7b5a566dd}
+      \strng{bibnamehash}{0070952aab521a9fa55eb9e7b5a566dd}
+      \strng{authorbibnamehash}{0070952aab521a9fa55eb9e7b5a566dd}
+      \strng{authornamehash}{0070952aab521a9fa55eb9e7b5a566dd}
+      \strng{authorfullhash}{0070952aab521a9fa55eb9e7b5a566dd}
+      \strng{authorfullhashraw}{0070952aab521a9fa55eb9e7b5a566dd}
+      \field{sortinit}{N}
+      \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Physical Review E}
+      \field{title}{Emergent Traffic Jams}
+      \field{volume}{51}
+      \field{year}{2000}
+      \field{pages}{2909\bibrangedash 2918}
+      \range{pages}{10}
+    \endentry
+    \entry{axelrod1997}{article}{}{}
+      \name{author}{1}{}{%
+        {{un=2,uniquepart=given,hash=44dd21ad378241eb1c71710543ac1ce0}{%
+           family={R.},
+           familyi={R\bibinitperiod},
+           given={Axelrod},
+           giveni={A\bibinitperiod},
+           givenun=2}}%
+      }
+      \strng{namehash}{44dd21ad378241eb1c71710543ac1ce0}
+      \strng{fullhash}{44dd21ad378241eb1c71710543ac1ce0}
+      \strng{fullhashraw}{44dd21ad378241eb1c71710543ac1ce0}
+      \strng{bibnamehash}{44dd21ad378241eb1c71710543ac1ce0}
+      \strng{authorbibnamehash}{44dd21ad378241eb1c71710543ac1ce0}
+      \strng{authornamehash}{44dd21ad378241eb1c71710543ac1ce0}
+      \strng{authorfullhash}{44dd21ad378241eb1c71710543ac1ce0}
+      \strng{authorfullhashraw}{44dd21ad378241eb1c71710543ac1ce0}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{J. Conflict Resolute}
+      \field{title}{The dissemination of culture: A model with local convergence and global polarization}
+      \field{volume}{41}
+      \field{year}{1997}
+      \field{pages}{203\bibrangedash 226}
+      \range{pages}{24}
+    \endentry
+    \entry{axtell2006}{article}{}{}
+      \name{author}{1}{}{%
+        {{un=2,uniquepart=given,hash=7762446940a64eaf463e072b0097d892}{%
+           family={R.},
+           familyi={R\bibinitperiod},
+           given={Axtell},
+           giveni={A\bibinitperiod},
+           givenun=2}}%
+      }
+      \strng{namehash}{7762446940a64eaf463e072b0097d892}
+      \strng{fullhash}{7762446940a64eaf463e072b0097d892}
+      \strng{fullhashraw}{7762446940a64eaf463e072b0097d892}
+      \strng{bibnamehash}{7762446940a64eaf463e072b0097d892}
+      \strng{authorbibnamehash}{7762446940a64eaf463e072b0097d892}
+      \strng{authornamehash}{7762446940a64eaf463e072b0097d892}
+      \strng{authorfullhash}{7762446940a64eaf463e072b0097d892}
+      \strng{authorfullhashraw}{7762446940a64eaf463e072b0097d892}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{CSED Working Pape}
+      \field{title}{Firm sizes: Facts, formulae and fantasies}
+      \field{volume}{4}
+      \field{year}{2003}
+    \endentry
+    \entry{vallacher2017}{book}{}{}
+      \name{author}{1}{}{%
+        {{un=1,uniquepart=given,hash=2f0002ed2abead70e6127e7eed15025b}{%
+           family={R.},
+           familyi={R\bibinitperiod},
+           given={Vallacher},
+           giveni={V\bibinitperiod},
+           givenun=1}}%
+      }
+      \list{publisher}{1}{%
+        {London: Routledge}%
+      }
+      \strng{namehash}{2f0002ed2abead70e6127e7eed15025b}
+      \strng{fullhash}{2f0002ed2abead70e6127e7eed15025b}
+      \strng{fullhashraw}{2f0002ed2abead70e6127e7eed15025b}
+      \strng{bibnamehash}{2f0002ed2abead70e6127e7eed15025b}
+      \strng{authorbibnamehash}{2f0002ed2abead70e6127e7eed15025b}
+      \strng{authornamehash}{2f0002ed2abead70e6127e7eed15025b}
+      \strng{authorfullhash}{2f0002ed2abead70e6127e7eed15025b}
+      \strng{authorfullhashraw}{2f0002ed2abead70e6127e7eed15025b}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Computational social psychology}
+      \field{year}{2017}
+    \endentry
+    \entry{helmreich1998}{article}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=d7f341f8e419519de21f5704aa802fb0}{%
+           family={S.},
+           familyi={S\bibinitperiod},
+           given={Helmreich},
+           giveni={H\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{d7f341f8e419519de21f5704aa802fb0}
+      \strng{fullhash}{d7f341f8e419519de21f5704aa802fb0}
+      \strng{fullhashraw}{d7f341f8e419519de21f5704aa802fb0}
+      \strng{bibnamehash}{d7f341f8e419519de21f5704aa802fb0}
+      \strng{authorbibnamehash}{d7f341f8e419519de21f5704aa802fb0}
+      \strng{authornamehash}{d7f341f8e419519de21f5704aa802fb0}
+      \strng{authorfullhash}{d7f341f8e419519de21f5704aa802fb0}
+      \strng{authorfullhashraw}{d7f341f8e419519de21f5704aa802fb0}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Artificial Life}
+      \field{title}{Silicon second nature: Culturing artificial life in a digital world}
+      \field{volume}{7}
+      \field{year}{1998}
+      \field{pages}{425\bibrangedash 428}
+      \range{pages}{4}
+    \endentry
+    \entry{sbe2018}{article}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=0547669e75cce13343e7350e6d58e8b7}{%
+           family={Souissi\bibnamedelima M.A.},
+           familyi={S\bibinitperiod\bibinitdelim M\bibinitperiod},
+           given={Ellaia\bibnamedelima R.},
+           giveni={E\bibinitperiod\bibinitdelim R\bibinitperiod},
+           givenun=0,
+           suffix={Bensaid\bibnamedelima Kh.},
+           suffixi={B\bibinitperiod\bibinitdelim K\bibinitperiod},
+           suffixun=0}}%
+      }
+      \strng{namehash}{0547669e75cce13343e7350e6d58e8b7}
+      \strng{fullhash}{0547669e75cce13343e7350e6d58e8b7}
+      \strng{fullhashraw}{0547669e75cce13343e7350e6d58e8b7}
+      \strng{bibnamehash}{0547669e75cce13343e7350e6d58e8b7}
+      \strng{authorbibnamehash}{0547669e75cce13343e7350e6d58e8b7}
+      \strng{authornamehash}{0547669e75cce13343e7350e6d58e8b7}
+      \strng{authorfullhash}{0547669e75cce13343e7350e6d58e8b7}
+      \strng{authorfullhashraw}{0547669e75cce13343e7350e6d58e8b7}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IMFI}
+      \field{title}{Multi-agent modeling and simulation of a stock market}
+      \field{volume}{15}
+      \field{year}{2018}
+      \field{pages}{123\bibrangedash 134}
+      \range{pages}{12}
+    \endentry
+    \entry{ljs2015}{article}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=81162516b224602eb6d585e7bb3b27b6}{%
+           family={Ju-Sung},
+           familyi={J\bibinithyphendelim S\bibinitperiod},
+           given={Leea},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{81162516b224602eb6d585e7bb3b27b6}
+      \strng{fullhash}{81162516b224602eb6d585e7bb3b27b6}
+      \strng{fullhashraw}{81162516b224602eb6d585e7bb3b27b6}
+      \strng{bibnamehash}{81162516b224602eb6d585e7bb3b27b6}
+      \strng{authorbibnamehash}{81162516b224602eb6d585e7bb3b27b6}
+      \strng{authornamehash}{81162516b224602eb6d585e7bb3b27b6}
+      \strng{authorfullhash}{81162516b224602eb6d585e7bb3b27b6}
+      \strng{authorfullhashraw}{81162516b224602eb6d585e7bb3b27b6}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{JASSS}
+      \field{title}{The complexities of agent-based modeling output analysis}
+      \field{volume}{18}
+      \field{year}{2015}
+      \field{pages}{4}
+      \range{pages}{1}
+    \endentry
+    \entry{tb2003}{article}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=ae6f01472baf5a34138f0af1462f6493}{%
+           family={Todd\bibnamedelima P.M.},
+           familyi={T\bibinitperiod\bibinitdelim P\bibinitperiod},
+           given={Billari\bibnamedelima F.C.},
+           giveni={B\bibinitperiod\bibinitdelim F\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{ae6f01472baf5a34138f0af1462f6493}
+      \strng{fullhash}{ae6f01472baf5a34138f0af1462f6493}
+      \strng{fullhashraw}{ae6f01472baf5a34138f0af1462f6493}
+      \strng{bibnamehash}{ae6f01472baf5a34138f0af1462f6493}
+      \strng{authorbibnamehash}{ae6f01472baf5a34138f0af1462f6493}
+      \strng{authornamehash}{ae6f01472baf5a34138f0af1462f6493}
+      \strng{authorfullhash}{ae6f01472baf5a34138f0af1462f6493}
+      \strng{authorfullhashraw}{ae6f01472baf5a34138f0af1462f6493}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Contributions to Economics}
+      \field{title}{Population-wide marriage patterns produced by individual mate-search heuristics}
+      \field{year}{2003}
+      \field{pages}{117\bibrangedash 137}
+      \range{pages}{21}
+    \endentry
+    \entry{ylz2018}{article}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=8c48e3b279409f4ff8fdd76a76a083d9}{%
+           family={Yang\bibnamedelima J.},
+           familyi={Y\bibinitperiod\bibinitdelim J\bibinitperiod},
+           given={Zhang\bibnamedelima G},
+           giveni={Z\bibinitperiod\bibinitdelim G\bibinitperiod},
+           givenun=0,
+           suffix={Liu\bibnamedelima R.},
+           suffixi={L\bibinitperiod\bibinitdelim R\bibinitperiod},
+           suffixun=0}}%
+      }
+      \strng{namehash}{8c48e3b279409f4ff8fdd76a76a083d9}
+      \strng{fullhash}{8c48e3b279409f4ff8fdd76a76a083d9}
+      \strng{fullhashraw}{8c48e3b279409f4ff8fdd76a76a083d9}
+      \strng{bibnamehash}{8c48e3b279409f4ff8fdd76a76a083d9}
+      \strng{authorbibnamehash}{8c48e3b279409f4ff8fdd76a76a083d9}
+      \strng{authornamehash}{8c48e3b279409f4ff8fdd76a76a083d9}
+      \strng{authorfullhash}{8c48e3b279409f4ff8fdd76a76a083d9}
+      \strng{authorfullhashraw}{8c48e3b279409f4ff8fdd76a76a083d9}
+      \field{sortinit}{Y}
+      \field{sortinithash}{fd67ad5a9ef0f7456bdd9aab10fe1495}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{JASSS}
+      \field{title}{Task structure, individual bounded rationality and crowdsourcing performance: An agent-based simulation approach}
+      \field{volume}{21}
+      \field{year}{2018}
+      \field{pages}{12}
+      \range{pages}{1}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+
