@@ -211,11 +211,84 @@ Herein, we describe a mathematical model of a market with a single firm. The mod
 
 \subsubsection{A model of an agent population}
 
-We consider a market populated by a large number N of consumers. Consumers are heterogeneous along two dimensions: Reservation price, where each $i$ consumer has a reservation price $R_i > 0$ showing the maximum price at which the consumer would buy the product, and Taste (the ideal product characteristic), where each consumer $i$ has a preferred product characteristic $S_i \in [0,1]$
+\par We consider a market populated by a large number $N$ of agents. Agents are heterogeneous along two dimensions: Reservation price, where each $i$ consumer has a reservation price $R_i > 0$ showing the maximum price at which the consumer would buy the product, and Taste (the ideal product characteristic), where each consumer $i$ has a preferred product characteristic $S_i \in [0,1]$. We assume that the random variables $R$ and $S$ are independent. 
+\par The pair of these random variables is taken from continuous distributions. In the numerical implementation used throughout the thesis, the Gamma distribution was used for the variable $R$ to reflect that there is a certain common reservation price in the population, but that there are some deviations as well. The type of distribution for random variable $S$ is about the particular style preference of an agent. Because we want the values of this distribution to fall in the interval [0,1], we used the Beta distribution. The choice of the Beta distribution was made because it contains the Uniform distribution, but also it may reflect the fact that there is a common value for the style choice with some variation. Therefore, we are ensured that reservation prices are positive and tastes are bounded on [0,1]. These distributions provide a flexible and economically convincing description of consumer heterogeneity.
+\par According to the model, agents make a binary decision: either purchase one unit of the product or not buys at all. In that way, the first step for the agent is to look at the price of the good. The utility of the agent from facing the good with price p and style o is the following
+\[
+u(r, s, p, o) = -\alpha \frac{p}{r} - \beta (s - o)^2
+\]
+where $r$ is a realization of the random variable $R$, $s$ is a realization of the random variable $S$, $p$ is the offered price of a good (assumed non-negative) with the style $o$. We can view $U$ as the random variable:
+\[
+U = -\alpha \frac{p}{R} - \beta (S - o)^2
+\]
+In the above formula, the parameters r and s describe the consumer (the agent) and the parameters $p$ and $o$ describe the good. Both these parameters are controlled by a firm producing the good.
+\par This specification takes into account such key economic factors, as decreasing of the utility as price increases relative to the agent’s wish to pay $r$ and with the squared distance between the consumer’s ideal taste $s$ and the product characteristic $o$.
+\par Agents are assumed to choose with some probability. The probability that an agent with characteristics $(r,s)$ buys the product is given by a logit rule:
+\[
+P(buy) = \frac{\exp\!\big(u\big)}{1 + \exp\!\big(u\big)}
+\]
+And the probability of not buy is given by the following formula:
+\[
+P(\text{not buy}) = 1 - \frac{\exp\!\big(u\big)}{1 + \exp\!\big(u\big)}
+\]
+The view of the probability of buying as a random variable $P$ is the following:
+\[
+\mathcal{P} = P(\text{buy})
+= \frac{\exp(U)}{1 + \exp(U)}
+= \frac{\exp\!\left(-\alpha \frac{p}{R} - \beta (S - o)^2\right)}
+{1 + \exp\!\left(-\alpha \frac{p}{R} - \beta (S - o)^2\right)}.
+\]
+This formulation suggests that buyers who have a greater extent of utility will be more inclined to purchase products, as long as one may still randomize individual behavior. Specifically, the probabilistic choice interpretation serves to model markets with incomplete information and repeated interaction.
 
-\subsubsection{Assumptions}
+\subsubsection{A model of a firm}
+A single firm supplies one product to the market. The firm chooses two decision variables: a price $p \geq 0$ and a product characteristic (style) $ s \in [0,1]$.
+For convenience, to indicate the expected profit of a single firm offering a good at price $p$ and with the style $o$, we assume that cost function $c(x)=c*x$, and $c>/0$. Therefore, the cost function is linear. The expected profit of a firm is then the following:
+\[
+\begin{aligned}
+	\mathbb{E}(\text{profit})
+	&= \mathbb{E}\!\big(p \cdot \text{demand} - c(\text{demand})\big) \\
+	&= \mathbb{E}\!\big(p \cdot \text{demand} - c \cdot \text{demand}\big) \\
+	&= \mathbb{E}\!\big(p \cdot N \cdot \mathcal{P} - c \cdot N \cdot \mathcal{P}\big) \\
+	&= \mathbb{E}\!\big((p - c)\cdot N \cdot \mathcal{P}\big) \\
+	&= (p - c)\cdot N \cdot \mathbb{E}(\mathcal{P}).
+\end{aligned}
+\]
+$where:$
+\[
+\begin{aligned}
+	\mathbb{E}(\mathcal{P})
+	&= \mathbb{E}\!\left(
+	\frac{\exp\!\left(-\alpha \frac{p}{r} - \beta (s - o)^2\right)}
+	{1 + \exp\!\left(-\alpha \frac{p}{r} - \beta (s - o)^2\right)}
+	\right) \\
+	&= \int_{0}^{\infty} \int_{0}^{\infty}
+	\frac{\exp\!\left(-\alpha \frac{p}{r} - \beta (s - o)^2\right)}
+	{1 + \exp\!\left(-\alpha \frac{p}{r} - \beta (s - o)^2\right)}
+	\, f_R(r)\, f_S(s)\, ds\, dr .
+\end{aligned}
+\]
 
-We assume that Both R and S are continuously distributed and agents make independent choices.
+Thus, the expected profit function generalizes the dilemma faced by a company: raising prices increases profit per unit of output, but reduces demand by decreasing the probability of buying.
+Since the expected buying probability is determined by a multivariate integral, the optimization problem cannot be solved analytically. Instead, it is approached numerically using a learning algorithm that simulates the firm's behavior under conditions of incomplete information:
+\[
+\max_{\substack{p \ge 0 \\ o \in [0,1]}}
+\; \Pi(p,o)
+= (p - c)\, N\, \mathbb{E}\!\left[P(p,o)\right].
+\]
+
+\subsubsection{Algorithm for a firm}
+
+In the model, the firm does not have full knowledge of its demand function, but adopts an algorithmic perspective driven by market outcomes and thus learns from what happens there. The firm follows a repeated five-step procedure:
+\begin{enumerate}
+	\item Drawing $(R_i, S_i)$ from their respective distributions creates a population of consumers. This population remains fixed throughout the analysis.
+	\item The firm selects initial values for price $p$ and product characteristic $o$.
+	\item Given $(p,o)$, each consumer makes a purchase decision according to the probabilistic rule defined by the utility function.
+	\item The firm observes aggregate demand and computes realized (or expected) profit.
+	\item By comparing current profit with profits obtained under small alternative changes, the firm adjusts either price or product characteristic. The firm adopts the change that improves profit and repeats the process.
+\end{enumerate}
+
+This algorithm keeps in mind the fact that firms do not solve their optimization problems instantaneously but instead experiment, observe outcomes, and ultimately improve their decisions. In the deterministic setup used in the simulations, the firm estimates expected demand (the sum of individual purchase probabilities), which corresponds to averaging outcomes over many repeated sales periods.
+
 \subsection{A model with two firms}
 
 % --- chapter ---------------------------------------------------------
