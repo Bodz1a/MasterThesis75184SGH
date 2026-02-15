@@ -201,7 +201,7 @@ This paper constructs some of the components of the structural model of consumer
 
 Because those profit functions usually do not support analytical solutions, the firms' optimization problems are solved numerically. Rather than simply assuming that a firm immediately calculates equilibrium strategies, it employs a simulation-based model in which firms investigate market effects and adapt their alternatives. In both cases, the method provides an opportunity to study market behavior under a limited amount of data, whilst also serving as a bridge between theoretical demand models and algorithmic decision making. To clearly demonstrate how consumer heterogeneity affects pricing, product design, and overall, the model is first devised around one firm. The model may be replicated with several firms engaged in a given market in which each firm's customer demand is uncertain in terms of the degree of uncertainty on consumers' demand and the behavior of its competitors. Under such circumstances, equilibrium results are reached by repeated interactions and learning, rather than through explicit decision making. 
 
-The thesis adds to knowledge on price and product competition in differentiated markets by applying a solid demand structure with mathematical and simulation-based solution methods. This approach is firmly rooted in economic theory, although it recognises the reality of features in real-world scenarios like learning, experimenting, and incomplete information that cannot be accurately modeled with an analytical approach. For this reason, it offers a flexible basis for studying firm behavior in modern markets characterized by a range of product-based distinctions and consumer heterogeneity, hence product differentiation as a key element of study.
+The thesis adds to knowledge on price and product competition in differentiated markets by applying a solid demand structure with mathematical and simulation-based solution methods. This approach is firmly rooted in economic theory, although it recognises the reality of features in real-world scenarios like learning, experimenting, and information that cannot be accurately modeled with an analytical approach. For this reason, it offers a flexible basis for studying firm behavior in modern markets characterized by a range of product-based distinctions and consumer heterogeneity, hence product differentiation as a key element of study.
 
 \clearpage
 \section{Literature review}
@@ -240,7 +240,7 @@ Here, we give a mathematical formulation of all models, but also for every model
 
 \subsection{A model with a single firm}
 
-Herein, we describe a mathematical model of a market with a single firm. The model's aim is to explain how heterogeneity among consumers creates demand and how a firm will choose prices and product attributes in response to that demand. Since the resulting profit function does not admit a closed-form solution, the decision problem of the firm is analyzed using a numerical, algorithmic approach reflecting learning under incomplete information.
+Herein, we describe a mathematical model of a market with a single firm. The model's aim is to explain how heterogeneity among consumers creates demand and how a firm will choose prices and product attributes in response to that demand. Since the resulting profit function does not admit a closed-form solution, the decision problem of the firm is analyzed using a numerical, algorithmic approach reflecting learning.
 
 \paragraph{A model of a consumer population.} 
 
@@ -310,25 +310,25 @@ The above formulation follows the rational choice theory, in essence stating tha
   \hfill
   \begin{subfigure}[t]{0.45\textwidth}
     \includegraphics[width=\textwidth]{./figs/w-fig-02-p-1-1.png}
-    \caption{The distribution of styles in the consumer population. The distribution is \(\Beta(4, 4)\). In simulations, we also use the distributions \(\Beta(2, 5)\) and \(\Beta(5, 2)\) to simulate the assymetri style distributions.}
+    \caption{The distribution of the probability of buying for \(R \sim \Gamma(4,1)\), \(\Beta(4, 4)\) and \(p=1, o = 1\).}
     \label{fig:probbuyb}
   \end{subfigure}
 
   \begin{subfigure}[t]{0.45\textwidth}
     \includegraphics[width=\textwidth]{./figs/w-fig-02-p-0-0.5.png}
-    \caption{The distribution of reservation prices in the consumer population. The distribution is \(\Gamma(4, 1)\). This distribution is used throughout all simulations and numerical calculations.}
+    \caption{The distribution of the probability of buying for \(R \sim \Gamma(4,1)\), \(\Beta(4, 4)\) and \(p=0, o = 1/2\).}
     \label{fig:probbuyc}
   \end{subfigure}
   \hfill
   \begin{subfigure}[t]{0.45\textwidth}
     \includegraphics[width=\textwidth]{./figs/w-fig-02-p-10-0.5.png}
-    \caption{The distribution of styles in the consumer population. The distribution is \(\Beta(4, 4)\). In simulations, we also use the distributions \(\Beta(2, 5)\) and \(\Beta(5, 2)\) to simulate the assymetri style distributions.}
+    \caption{The distribution of the probability of buying for \(R \sim \Gamma(4,1)\), \(\Beta(4, 4)\) and \(p=10, o = 1/2\).}
     \label{fig:probbuyd}
   \end{subfigure}
   
   \captionsetup{margin=10pt,font=small,labelfont=bf,width=.8\textwidth}
 
-  \caption[Distributions of reservation prices and styles]{In all numerical calculations and simulations, we use two types of distributions. The gamma distribution for the distribution of reservation prices and the beta distribution for the distribution of styles. \textit{Source:} own calculations}\label{fig:probbuy}
+  \caption{Distribution of individual purchase probabilities under different price and product positioning scenarios. Panels compare moderate price with central positioning, moderate price with extreme positioning, zero price, and high price. \textit{Source:} own calculations}\label{fig:probbuy}
 \end{figure}
 
 % discussion for the above figure
@@ -381,6 +381,7 @@ Thus, the expected profit function generalizes the dilemma faced by a company: r
   \caption[Expected profits]{Expected profits of a firm; the figure shows behavior in two distinct situations. The top one is when the style of the product is exactly matched to the average style of the population. The lower curve shows behavior when the style is not aligned with the population's average style. In both situations, there is a unique price that maximizes profit. \textit{Source:} own calculations}\label{fig:profit}
 \end{figure}
 
+Figure~\ref{fig:profit} presents the expected profit as a function of price for two positions of product. In this example, for both cases the marginal cost is 1/2 and there are 10 consumers. The blue curve, where the product characteristic equals the average consumer taste, lies above the red curve at all price levels. This means better matching the product to consumer preferences increases purchase probabilities and shifts the overall profit function upward. Thus, correct positioning of the product results in higher maximum profit and stronger pricing power than the product misaligned with average taste.
 % discussion of a figure showing the expected profit curves
 
 
@@ -389,24 +390,27 @@ Thus, the expected profit function generalizes the dilemma faced by a company: r
 
 In the model, the firm lacks full knowledge of its demand function but adopts an algorithmic perspective driven by market outcomes, thereby learning from what happens there. The firm follows a repeated five-step procedure:
 \begin{enumerate}[noitemsep]
-	\item The firm selects initial values for price $p$ and product characteristic $o$.
+	\item The firm selects initial values for price $p$ and product characteristic $o$. These are just starting guesses. They do not necessarily have to be optimal.
 	\item Given $(p,o)$, each consumer makes a purchase decision according to the probabilistic rule defined by the utility function.
-	\item The firm observes aggregate demand and computes realized profit.
-	\item By comparing current profit with profits obtained under small alternative changes, the firm adjusts either price or product characteristic. The firm adopts the change that improves profit and repeats the process.
+	\item Having current $p$ and $o$, the firm computes utility $u$, converges utility into purchase probability $\buy$, observes aggregate demand and computes realized profit. So at every iteration, the firm knows its expected profit.
+	\item By comparing current profit with profits obtained under small alternative changes, the firm adjusts either price or product characteristic. The firm does not search globally. Instead, it tests small nearby changes. So, having step sizes \(\Delta p,\, \Delta o\), firm compares $p-\Delta p$, $p$ and $p+\Delta p$, while style is fixed, if updating price. Analogically, if updating styles, the firm compares $o-\Delta o$, $o$ and $o+\Delta o$, while price is fixed.
+	
+	For example, having the initial price $p = 5,8$ and step size $\Delta p = 0,2$, the firm tests three posibilities: slightly lower price ($p = 5,6$), same price ($p = 5,8$) and slightly higher price ($p = 6$). Then it computes profit for each and keeps the best one. So at each step, it only explores a small local neighborhood.
+	\item For each candidate pair $(p,o)$, profit is computed. The firm selects the candidate that yields the highest profit. If none improves profit, the firm stays at current values. 
+	\item At last, the process repeats until convergence. That means, that firm is trying local move, keeping the best one and continues, until price and style stop changing significantly. At that point, the algorithm stops. 
 \end{enumerate}
 
-The algorithm keeps in mind the fact that firms do not solve their optimization problems instantaneously but instead experiment, observe outcomes, and ultimately improve their decisions. In the deterministic setup used in the simulations, the firm estimates expected demand (the sum of individual purchase probabilities), which corresponds to averaging outcomes over many repeated sales periods.
+Economically, the firm is gradually increasing price if higher markup does not lead to demand loss, decreasing price if demand is too sensitive and moving style toward the center of consumer tastes to reduce mismatch. This methodology is implied because the profit function is smooth and small steps eventually lead to the maximum, having a single peak point. It is numerical profit maximization based on repeated local comparisons.
 
 \subsection{A model with two firms}
 
 This subsection extends the single-firm framework to a market with two competing firms. The extension preserves the same structure of consumer heterogeneity and probabilistic choice, but modifies the agent's decision problem: instead of choosing between “buy” and “not buy” from one firm, consumers choose among firm 1, firm 2, and an outside option (no purchase) to allow demand to be split endogenously between firms as a function of both prices and product characteristics.
 
-As for the model with single-firm, we consider a market populated by a large number $N$ of agents with the same characteristics, which are the Reservation price $R_i > 0$ and Taste, where each consumer $i$ has a preferred product characteristic $S_i \in [0,1]$ with the same parametric choices for numerical analysis as in the single-firm model, which are Gamma distribution for $R$ and Beta distribution for $S$.
+As for the model with single-firm, we consider a market populated by a large number $N$ of agents with the same characteristics, which are the reservation price $R_i > 0$ and taste, where each agent $i$ has a preferred product characteristic $S_i \in [0,1]$ with the same parametric choices for numerical analysis as in the single-firm model, which are Gamma distribution for $R$ and Beta distribution for $S$.
 
-\subsubsection{A model of a firm and agent population}
+\paragraph{A model of a firm and agent population.}
 
-There are two firms $j \in \{1,2\}$. Each firm supplies one product and chooses a price $p_j > 0$ and taste $o_j \in [0,1]$ with marginal cost $c_j > 0$. For convenience, we can impulse symmetry $c_1 = c_2 = c$.
-Given a consumer with characteristics $(r,s)$, indirect utility from purchasing from firm $j$ is specified similarly to the single-firm model:
+There are two firms $j \in \{1,2\}$. Each firm supplies one product and chooses a price $p_j > 0$ and taste $o_j \in [0,1]$ with marginal cost $c_j > 0$. Given a consumer with characteristics $(r,s)$, indirect utility from purchasing from firm $j$ is specified similarly to the single-firm model:
 
 \[
 u_j(r, s; p_j, o_j)
@@ -425,7 +429,7 @@ u_0(r, s)
 Agents choose among alternatives ${0, 1, 2}$ (not buying at all, buying from firm 1 and buying from firm 2) using a multinomial logit rule. For an agent with $(r,s)$ the probability of purchasing from firm $j \in \{1,2\}$ is:
 
 \[
-P_j(r,s)
+\buy(r,s)
 =
 \frac{\exp\!\big(u_j(r,s; p_j, o_j)\big)}
 {1 + \exp\!\big(u_1(r,s; p_1, o_1)\big)
@@ -435,7 +439,7 @@ P_j(r,s)
 The probability of no buying is:
 
 \[
-P_0(r,s)
+\buy_0(r,s)
 =
 \frac{1}
 {1 + \exp\!\big(u_1(r,s; p_1, o_1)\big)
@@ -480,7 +484,7 @@ Expected profit is therefore:
 
 The essential characteristic of competition is that $Pi_j$ depends on both firms’ decisions. For instance, an increase in $p_2$ typically raises firm 1’s demand by shifting consumers toward firm 1, all else equal. Likewise, changes in $o_1$ and $o_2$ affect substitution patterns through taste mismatch.
 
-\subsubsection{Equilibrium concept}
+\paragraph{Equilibrium concept.}
 
 A firm’s strategy is the pair $(p_j,o_j)$. The strategy profile is: $(p_1, p_2, o_1, o_2)$. The two-firm model constitutes a game in which each firm chooses $p_j$ and $o_j$ to maximize expected profit given the competitor’s strategy.
 A Nash equilibrium is a strategy profile \((p_1^*, o_1^*, p_2^*, o_2^*)\) such that each firm's strategy is a best response to the other's:
@@ -501,19 +505,22 @@ A Nash equilibrium is a strategy profile \((p_1^*, o_1^*, p_2^*, o_2^*)\) such t
 
 Since expected demand is defined by integrals over heterogeneous consumer types, analytical best responses and closed-form equilibria are generally not applicable here. For this reason, the model is  studied using numerical methods.
 
-\subsubsection{Learning interpretation}
+\paragraph{Learning interpretation.}
 
 In many real markets, firms cannot know the exact demand function or the distribution of consumer preferences, and firms may not perfectly observe strategies of competitors. This pushes a learning-based understanding of firm behavior. Following the iterative algorithm of the single-firm numerical procedure, we assume that each firm:
 
 \begin{enumerate}
-\item A consumer population is generated (or estimated from data).
-\item Firms choose initial values for $p_j$ and $o_j$.
-\item Consumers make decisions and market shares $Q_1$ and $Q_2$ are realized (or expected values are computed).
-\item Each firm observes its own demand and profit.
-\item Each firm adjusts either its price or product characteristic using a local improvement rule.
+\item A consumer population is generated.
+\item Both firms begin with some arbitrary values for $p_j$ and $o_j$. These are just starting guesses, as well as in the single-firm algorithm.
+\item Given current values, the model compute utility for each consumer for both firms, computes logit probabilities, aggregates demand and then computes profits.
+\item Firm 1 is making updates. It is a try to improve its' profit when the Firm 2 keeps the price and style fixed.
+
+Just as it was performed for a single-firm model, it is updating price using small steps $p-\Delta p$, $p$ and $p+\Delta p$ or updating styles $o-\Delta o$, $o$ and $o+\Delta o$. So, while firm 2’s strategy stays constant, firm 1 computes profit for each candidate and keeps the best one, performing a local best response to firm 2..
+\item Now firm 2 does the same. It treats firm 1’s updated values as fixed and tests higher or lower prices and different style, computing profit for each case and keeping the best option. In that way, firm 2 performs a local best response to firm 1.
+\item The algorithm repeats competition with firms making adjustments until neither firm can improve profit by small local changes
 \end{enumerate}
 
-Repeated interaction produces a dynamic process wherein strategies evolve. This process, under regularity conditions, may result in some stable outcome, which can be viewed as an approximate equilibrium.
+This is an approximation of iterated best-response dynamics. Over time, strategies stabilize. Each firm slightly adjusts its price or product design while the competitor stays fixed, keeps only profitable changes, and repeats until neither firm can improve. The final outcome is an approximate Nash equilibrium.
  % --- chapter ---------------------------------------------------------
 \clearpage
 \section{Implementation of mathematical models}
@@ -829,7 +836,7 @@ This outcome reflects the symmetric structure of costs and the substitution patt
 \clearpage
 \section{Conclusions}
 
-Within this thesis were built and simulated the mathematical model that describes firm behaviour in the presence of a heterogeneity of consumer preferences. It aimed to study the optimal prices and product characteristics that firms determine in the context of incomplete information, and to analyze how those choices change under competition. 
+Within this thesis were built and simulated the mathematical model that describes firm behaviour in the presence of a heterogeneity of consumer preferences. It aimed to study the optimal prices and product characteristics that firms determine, and to analyze how those choices change under competition. 
 
 The model consists of heterogeneous consumers with logit-based demand and profit-maximizing firms with time series price and product design change. Since there are no available analytical solutions, equilibrium results have been obtained by a structured numerical learning algorithm. 
 
