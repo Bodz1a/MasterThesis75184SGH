@@ -1,0 +1,19 @@
+
+* General notes
+
+1. We do not use the term "incomplete information". Also, we do not use the term "imperfect information". 
+
+* Chapters
+
+** DONE Introduction
+
+** DONE Literature review
+
+** TODO Mathematical models
+*** TODO A model with a single firm
+
+1. We need to finish the discussion of the figure showing distribution of the buying probability.
+2. We need to finish the discussion of the figure showing the expected profit curves.
+3. Part that is description of the behavior of a firm needs to be way more precise than now.
+
+*** TODO A model with two firms

@@ -131,6 +131,10 @@
 
 % --- useful definitions ----------------------------------------------
 \newcommand{\code}[1]{\lstinline{#1}}
+\newcommand{\setn}{\mathbb{N}}
+\newcommand{\Beta}{\mathrm{Beta}}
+\newcommand{\prob}[1]{\mathbb{P}\left( #1\right)}
+\newcommand{\buy}{{\cal B}}
 
 % ---------------------------------------------------------------------
 \begin{document}
@@ -195,9 +199,9 @@ Conventional economic models commonly concern firm behavior with static equilibr
 
 This paper constructs some of the components of the structural model of consumer demand in which individual consumers vary in their willingness to pay and prefer product attributes. To compete in a market for distinctively priced goods, companies decide not just on prices but also on the features of the products. Demand is the outcome of individual consumer choices, probabilistically dependent on price and the level of conformity of all features of the product with consumer preferences. Consequently, aggregate demand and firm profits are endogenous results of heterogeneous economic decisions at the micro level. 
 
-Because those profit functions usually do not support analytical solutions, the firms optimization problems are solved numerically. Rather than simply assuming that a firm immediately calculates equilibrium strategies, it employs a simulation-based model in which firms investigate market effects and adapt their alternatives. In both cases, the method provides an opportunity to study market behavior under a limited amount of data, whilst also serving as a bridge between theoretical demand models and algorithmic decision making. To clearly demonstrate how consumer heterogeneity affects pricing, product design, and overall, the model is first devised around one firm. The model may be replicated with several firms engaged in a given market in which each firm's customer demand is uncertain in terms of the degree of uncertainty on consumers' demand and the behavior of its competitors. Under such circumstances, equilibrium results are reached by repeated interactions and learning, rather than through explicit decision making. 
+Because those profit functions usually do not support analytical solutions, the firms' optimization problems are solved numerically. Rather than simply assuming that a firm immediately calculates equilibrium strategies, it employs a simulation-based model in which firms investigate market effects and adapt their alternatives. In both cases, the method provides an opportunity to study market behavior under a limited amount of data, whilst also serving as a bridge between theoretical demand models and algorithmic decision making. To clearly demonstrate how consumer heterogeneity affects pricing, product design, and overall, the model is first devised around one firm. The model may be replicated with several firms engaged in a given market in which each firm's customer demand is uncertain in terms of the degree of uncertainty on consumers' demand and the behavior of its competitors. Under such circumstances, equilibrium results are reached by repeated interactions and learning, rather than through explicit decision making. 
 
-The thesis adds to knowledge on price and product competition in differentiated markets by applying a solid demand structure with mathematical and simulation-based solution methods. This approach is firmly rooted in economic theory, although it recognises the reality of features in real-world scenarios like learning, experimenting and incomplete information that cannot be accurately modeled with an analytical approach. For this reason, it offers a flexible basis for studying firm behavior in modern markets characterized by a range of product-based distinctions and consumer heterogeneity, hence product differentiation as a key element of study.
+The thesis adds to knowledge on price and product competition in differentiated markets by applying a solid demand structure with mathematical and simulation-based solution methods. This approach is firmly rooted in economic theory, although it recognises the reality of features in real-world scenarios like learning, experimenting, and incomplete information that cannot be accurately modeled with an analytical approach. For this reason, it offers a flexible basis for studying firm behavior in modern markets characterized by a range of product-based distinctions and consumer heterogeneity, hence product differentiation as a key element of study.
 
 \clearpage
 \section{Literature review}
@@ -207,97 +211,146 @@ The thesis adds to knowledge on price and product competition in differentiated 
 One of the first and most significant works in the field of development and research of agent-oriented models is considered to be the work ``Growing Artificial Societies'' by \textcite{epstein1996}, in which the authors put forward a new research program based on agent-oriented modeling. Of course, they were not the first to use an agent-based approach in the study of socio-economic phenomena. The first meaningful attempts to apply it can be found in the works of Schelling (1971), Albin and Foley (1990), Axelrod and Bennett (1993), Axelrod (1997), Danielson (1996), and others. However, Epstein and Axtell were the first to explicitly outline the contours of a new methodology. Following \textcite{epstein1996}:
 
 \begin{quote}
-``Our broad goal is to begin developing a unified social science in which evolutionary processes would be embedded in a computational environment that simulates social and economic phenomena. One day, when people ask about the possibility of explaining something, they will mean the ability to grow it in silico, demonstrating how a limited set of microfactors generates macro-phenomena. The development of IT technologies opens up the prospect of looking at the world of social phenomena through the prism of a new science''.
+\textit{``Our broad goal is to begin developing a unified social science in which evolutionary processes would be embedded in a computational environment that simulates social and economic phenomena. One day, when people ask about the possibility of explaining something, they will mean the ability to grow it in silico, demonstrating how a limited set of microfactors generates macro-phenomena. The development of IT technologies opens up the prospect of looking at the world of social phenomena through the prism of a new science''.}
 \end{quote}
 
 The research program on artificial societies sees the prospect of overcoming the problem of the subjective component of social processes in the development of computing technologies and agent-oriented modeling methodology. Virtual analogues of the designed systems allow simulation experiments to be conducted and complex hypotheses to be generated and verified. Over the past decade, a large number of works have appeared that claim an agent-oriented approach as their methodological basis.
 
 Despite sharing common fundamental features, including the presence of several autonomously acting entities seeking to maximize an inherent objective function, agent models can vary significantly in terms of the degree of abstraction and detail of the processes being analyzed. In one model, agents can be elementary entities of socio-economic relations, such as individuals (buyers, sellers, voters, road traffic participants) or aggregated entities acting on behalf of several individuals (legal entities, public law entities, unions, coalitions). Differences in the level of abstraction of agent models are determined by the specificity of the represented entities, the quality of the content of their target functions, and the ways in which they interact. There are also models represented by many agents, whose mechanisms and interaction goals are abstract in nature, are complex to parameterize and are focused on studying emerging behavior and emergent effects. Information about the modes of interaction of individual entities allows us to formulate and investigate hypotheses about the global dynamics of systems. However, possessing information about the global dynamics of a complex system allows us to formulate and test hypotheses about the rules of functioning of its constituent agents.
 
-\subsection{High-level abstraction agent modeling}
+\paragraph{High-level abstraction agent modeling.} Highly abstract agent modeling is typically used in studies of objects with a high subjective component. An example of such an object is the marriage market, whose participants, being both commodities and consumers, make their choices based on several subjective criteria, such as age, level of education and wealth, skin color, ethnic origin of the partner, and more \textcite{tb2003}.
 
-Highly abstract agent modeling is typically used in studies of objects with a high subjective component. An example of such an object is the marriage market, whose participants, being both commodities and consumers, make their choices based on several subjective criteria, such as age, level of education and wealth, skin color, ethnic origin of the partner, and more \textcite{tb2003}.
-
-The breadth and analytical power of the agent-based approach in analyzing abstract subjects is reflected in examples of its application in studies of racial segregation \parencite{schelling1971}, the life cycle of firms \parencite{axtell2006}, stock market dynamics \parencite{sbe2018}, cultural convergence \parencite{axelrod1997} or electoral procedures \parencite{hsm2019}.
+The breadth and analytical power of the agent-based approach in analyzing abstract subjects is reflected in examples of its application in studies of racial segregation \parencite{schelling1971}, the life cycle of firms \parencite{axtell2006}, stock market dynamics \parencite{sbe2018}, cultural convergence \parencite{axelrod1997}, or electoral procedures \parencite{hsm2019}.
 
 Agent-based modeling differs from classical statistical and econometric approaches, which focus on simply calculating coefficients that determine the relationship between the resulting variables and the assumed regressors, in that it aims to reveal the hidden secrets of the phenomenon under study. It is this advantage that makes it indispensable when studying structural effects.
 
-\subsection{Low-level abstraction agent modeling}
+\paragraph{Low-level abstraction agent modeling. } Low-level abstraction agent models are usually and most commonly applied in practice. The subjects in them are defined at the level of individuals taken in specific systems of relations. The relative simplicity of quantitative parameterization and the low dispersion of results variation with identical inputs make such models convenient and reliable forecasting tools. The impact of variations in individual elements on the global dynamics of modeled systems can be intuitively predictable. However, including a large number of factors and types of interacting subjects in the analysis significantly reduces the quality of speculative forecasts. This is precisely where the applied significance of models of this type, widely used in demographic studies, consumer choice studies, evacuation models \parencite{ht2000}, transport optimization \parencite{np1995}, pedestrian traffic \parencite{hm1995}, and many more.
 
-Low-level abstraction agent models are usually and most commonly applied in practice. The subjects in them are defined at the level of individuals taken in specific systems of relations. The relative simplicity of quantitative parameterization and the low dispersion of results variation with identical inputs make such models convenient and reliable forecasting tools. The impact of variations in individual elements on the global dynamics of modeled systems can be intuitively predictable. However, including a large number of factors and types of interacting subjects in the analysis significantly reduces the quality of speculative forecasts. This is precisely where the applied significance of models of this type, widely used in demographic studies, consumer choice studies, evacuation models \parencite{ht2000}, transport optimization \parencite{np1995}, pedestrian traffic \parencite{hm1995} and many more.
+\paragraph{Criticism and evaluation of the methodology's capabilities. } Critically commenting on the methodology of agent-based modeling, American anthropologist S. Helmreich notes that the cultivation of artificial society structures is a formalization of research biases \parencite{helmreich1998}. This observation is not without merit. However, despite the vulnerability of the agent-based approach to such criticism, its solid scientific foundations cannot be denied—any conclusions obtained with its help are fundamentally falsifiable (in the Popperian sense), and therefore open to empirical verification. Today, the methodology of the agent-oriented approach continues to develop actively. More and more publications are appearing in the literature devoted to a critical analysis of its practical application. The high interdisciplinary potential of the methodology hinders the development of universal criteria for the validity of agent models. The requirements for simulation experiments are actively debated. In particular, the issue of the stability (robustness) of results and the framework of quantitative sufficiency of emulation runs is discussed \parencite{ljs2015}.
 
-\subsection{Criticism and evaluation of the methodology's capabilities}
-
-Critically commenting on the methodology of agent-based modeling, American anthropologist S. Helmreich notes that the cultivation of artificial society structures is a formalization of research biases \parencite{helmreich1998}. This observation is not without merit. However, despite the vulnerability of the agent-based approach to such criticism, its solid scientific foundations cannot be denied—any conclusions obtained with its help are fundamentally falsifiable (in the Popperian sense), and therefore open to empirical verification. Today, the methodology of the agent-oriented approach continues to develop actively. More and more publications are appearing in the literature devoted to a critical analysis of its practical application. The high interdisciplinary potential of the methodology hinders the development of universal criteria for the validity of agent models. The requirements for simulation experiments are actively debated. In particular, the issue of the stability (robustness) of results and the framework of quantitative sufficiency of emulation runs is discussed \parencite{ljs2015}.
-
-The growing trend toward agent-based modeling in the study of abstract objects suggests that it will soon be applied to the humanities to issues in philosophy, psychology, and creativity. In the near future, the agent-based approach will be transformed by the rapidly developing field of artificial intelligence. Opportunities are emerging for the construction of highly complex simulators based on highly intelligent agents \parencite{vallacher2017}. We can expect to see the reconstruction of old models based on more sophisticated operating algorithms. The current agenda allows us to predict an increase in the use of the agent-based approach in analyzing epidemics and the consequences of other external economic shock \parencite{ylz2018}.
+The growing trend toward agent-based modeling in the study of abstract objects suggests it will soon be applied in the humanities to address issues in philosophy, psychology, and creativity. In the near future, the agent-based approach will be transformed by the rapidly developing field of artificial intelligence. Opportunities are emerging for the construction of highly complex simulators based on highly intelligent agents \parencite{vallacher2017}. We can expect to see the reconstruction of old models based on more sophisticated operating algorithms. The current agenda allows us to predict an increase in the use of the agent-based approach in analyzing epidemics and the consequences of other external economic shocks \parencite{ylz2018}.
 
 The development of digital technologies has led to a qualitative change in the utilitarian properties of computing technology. Software adaptation of complex cognitive schemes has turned the computer into an innovative tool for solving creative problems. The increase in the computing power of modern computers, the development of new cognitive technologies, and the agent-oriented approach in particular, are bringing humanity closer to the possibility of solving problems of unlimited complexity.
-
 
 % --- chapter ---------------------------------------------------------
 \clearpage
 \section{Mathematical models}
 
-Here we give mathematical formulation of all models, but also for every model we numerically solve the model for some selected values of initial and exogenous parameters. We need to make those variables exactly the same as the one we take for simulations so that we can compare the results.
+Here, we give a mathematical formulation of all models, but also for every model, we numerically solve the model for some selected values of exogenous parameters. We need to make those variables exactly the same as the one we take for simulations so that we can compare the results.
 
 \subsection{A model with a single firm}
 
 Herein, we describe a mathematical model of a market with a single firm. The model's aim is to explain how heterogeneity among consumers creates demand and how a firm will choose prices and product attributes in response to that demand. Since the resulting profit function does not admit a closed-form solution, the decision problem of the firm is analyzed using a numerical, algorithmic approach reflecting learning under incomplete information.
 
-\subsubsection{A model of an agent population}
+\paragraph{A model of a consumer population.} 
 
-We consider a market populated by a large number $N$ of agents. Agents are heterogeneous along two dimensions: Reservation price, where each $i$ consumer has a reservation price $R_i > 0$ showing the maximum price at which the consumer would buy the product, and Taste (the ideal product characteristic), where each consumer $i$ has a preferred product characteristic $S_i \in [0,1]$. We assume that the random variables $R$ and $S$ are independent. 
+% definition of an agent
+We consider a market populated by a large number of consumers\footnote{We also refer to consumers as agents because we use agent-based simulations later when solving the model. We use these names interchangeably.} \(N \in \setn\). Agents are heterogeneous along two dimensions: reservation price, where each consumer \(i\) has a reservation price $r_i > 0$ showing the maximum price at which the consumer would buy the product, and taste (the ideal product characteristic), where each consumer $i$ has a preferred product characteristic $s_i \in [0,1]$. These two numbers are realizations of two random variables $R$ and $S$. We assume that these random variables are independent. 
 
-The pair of these random variables is taken from continuous distributions. In the numerical implementation used throughout the thesis, the Gamma distribution was used for the variable $R$ to reflect that there is a certain common reservation price in the population, but that there are some deviations as well. The type of distribution for random variable $S$ is about the particular style preference of an agent. Because we want the values of this distribution to fall in the interval $[0,1]$, we used the Beta distribution. The choice of the Beta distribution was made because it contains the Uniform distribution, but also it may reflect the fact that there is a common value for the style choice with some variation. Therefore, we are ensured that reservation prices are positive and tastes are bounded on $[0,1]$. These distributions provide a flexible and economically convincing description of consumer heterogeneity.
+We further assume that these random variables are continuous distributions. In the numerical implementation used throughout the thesis, the Gamma distribution was used for the random variable $R$ to reflect that there is a certain common reservation price in the population, but that there are some deviations as well. The type of distribution of the random variable $S$ models the style preferences of agents. Because we want the values of this distribution to fall in the interval $[0,1]$, we use the Beta distribution. The choice of the Beta distribution was made because it contains the Uniform distribution, but also it may reflect the fact that there is a common value for the style choice with some variation. Because of the choice of these two random variables, we know that reservation prices are positive and tastes belong to the interval $[0,1]$. These distributions provide a flexible and economically convincing description of consumer heterogeneity.
 
-According to the model, agents make a binary decision: either purchase one unit of the product or do not buy at all. In that way, the first step for the agent is to look at the price of the good. The utility of the agent from facing the good with price \(p\) and style \(o\) is the following
+According to the model, agents make a binary decision: either purchase one unit of the product or do not buy at all. The (negative) utility of the agent represented by the reservation price \(r\) and the style type \(s\) from facing the good with price \(p\) and style \(o\) is the following
+\begin{equation}\label{eq-utility-1}
+u(r, s, p, o) = -\alpha \; \frac{p}{r} - \beta (s - o)^2
+\end{equation}
+where $r$ is a realization of the random variable $R$, $s$ is a realization of the random variable $S$, $p$ is the offered price of a good (assumed non-negative) with the style $o \in [0,1]$. In the formula \eqref{eq-utility-1}, the parameters \(r\) and \(s\) describe the consumer (the agent), and the parameters $p$ and $o$ describe the good. Both these latter parameters are controlled by a firm producing the good. This specification takes into account such key economic factors as the decrease in the utility as price increases relative to the agent’s reservation price $r$ and with the squared distance between the consumer’s ideal style $s$ and the product characteristic $o$.
+
+If a single consumer is drawn at random from the population, the formula \eqref{eq-utility-1} becomes a random variable \(U\) that reads
+\begin{equation}\label{eq-rv-u}
+U = -\alpha \; \frac{p}{R} - \beta (S - o)^2 .
+\end{equation}
+
+% a figure showing an example of the distribution of U
+\begin{figure}[hbt]
+  \centering
+  \begin{subfigure}[t]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{./figs/w-fig-00-gamma.png}
+    \caption{The distribution of reservation prices in the consumer population. The distribution is \(\Gamma(4, 1)\). This distribution is used throughout all simulations and numerical calculations.}
+    \label{fig:gammabetaa}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{./figs/w-fig-01-beta-44.png}
+    \caption{The distribution of styles in the consumer population. The distribution is \(\Beta(4, 4)\). In simulations, we also use the distributions \(\Beta(2, 5)\) and \(\Beta(5, 2)\) to simulate the assymetri style distributions.}
+    \label{fig:gammabetab}
+  \end{subfigure}
+  
+  \captionsetup{margin=10pt,font=small,labelfont=bf,width=.8\textwidth}
+
+  \caption[Distributions of reservation prices and styles]{In all numerical calculations and simulations, we use two types of distributions. The gamma distribution for the distribution of reservation prices and the beta distribution for the distribution of styles. \textit{Source:} own calculations}\label{fig:gammabeta}
+\end{figure}
+
+% the choice of agent
+Agents are assumed to decide whether to buy a good with some probability. The probability that an agent with characteristics $(r,s)$ buys the product given as \((p, o)\) is given by a logit rule:
 \[
-u(r, s, p, o) = -\alpha \frac{p}{r} - \beta (s - o)^2
-\]
-where $r$ is a realization of the random variable $R$, $s$ is a realization of the random variable $S$, $p$ is the offered price of a good (assumed non-negative) with the style $o$. We can view $U$ as the random variable:
-\[
-U = -\alpha \frac{p}{R} - \beta (S - o)^2
-\]
-In the above formula, the parameters r and s describe the consumer (the agent) and the parameters $p$ and $o$ describe the good. Both these parameters are controlled by a firm producing the good.
-
-This specification takes into account such key economic factors as the decrease in the utility as price increases relative to the agent’s wish to pay $r$ and with the squared distance between the consumer’s ideal taste $s$ and the product characteristic $o$.
-
-Agents are assumed to choose with some probability. The probability that an agent with characteristics $(r,s)$ buys the product is given by a logit rule:
-\[
-P(\text{buy}) = \frac{\exp\!\big(u\big)}{1 + \exp\!\big(u\big)}
+\prob{\text{buy}} = \frac{\exp\!\big(u\big)}{1 + \exp\!\big(u\big)} . 
 \]
 And the probability of not buying is given by the following formula:
 \[
-P(\text{not buy}) = 1 - \frac{\exp\!\big(u\big)}{1 + \exp\!\big(u\big)}
+\prob{\text{not buy}} = 1 - \frac{\exp\!\big(u\big)}{1 + \exp\!\big(u\big)}
 \]
-In fact, the above probabilities are random variables. In particular, the probability of buying is a random variable $\mathcal{P}$ that reads:
+In fact, the above probabilities are random variables. In particular, when a single consumer is drawn from the population at random, the probability of buying is a random variable $\buy$ that reads:
 \[
-\mathcal{P} = P(\text{buy})
+\buy = \prob{\text{buy}}
 = \frac{\exp(U)}{1 + \exp(U)}
 = \frac{\exp\!\left(-\alpha \frac{p}{R} - \beta (S - o)^2\right)}
 {1 + \exp\!\left(-\alpha \frac{p}{R} - \beta (S - o)^2\right)}.
 \]
-This formulation suggests that buyers who have a greater extent of utility will be more inclined to purchase products, as long as one may still randomize individual behavior. Specifically, the probabilistic choice interpretation serves to model markets with incomplete information and repeated interaction.
 
-\subsubsection{A model of a firm}
+The above formulation follows the rational choice theory, in essence stating that the agents with higher utility are more likely to buy a product. However, it also introduces stochastic elements that model irrational aspects of decision-making, given that the firm does not know a particular agent's reservation price or preferred style precisely.
 
-A single firm supplies one product to the market. The firm chooses two decision variables: a price $p \geq 0$ and a product characteristic (style) $ s \in [0,1]$.
-For convenience, to indicate the expected profit of a single firm offering a good at price $p$ and with the style $o$, we assume that the cost function $c(x)=c \cdot x$, and $c>0$. Therefore, the cost function is linear. The expected profit of a firm is then the following:
+% a figure showing the distribution of probability of buying the good
+\begin{figure}[hbt]
+  \centering
+  \begin{subfigure}[t]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{./figs/w-fig-02-p-1-0.5.png}
+    \caption{The distribution of the probability of buying for \(R \sim \Gamma(4,1)\), \(\Beta(4, 4)\) and \(p=1, o = 1/2\). }
+    \label{fig:probbuya}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{./figs/w-fig-02-p-1-1.png}
+    \caption{The distribution of styles in the consumer population. The distribution is \(\Beta(4, 4)\). In simulations, we also use the distributions \(\Beta(2, 5)\) and \(\Beta(5, 2)\) to simulate the assymetri style distributions.}
+    \label{fig:probbuyb}
+  \end{subfigure}
+
+  \begin{subfigure}[t]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{./figs/w-fig-02-p-0-0.5.png}
+    \caption{The distribution of reservation prices in the consumer population. The distribution is \(\Gamma(4, 1)\). This distribution is used throughout all simulations and numerical calculations.}
+    \label{fig:probbuyc}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{./figs/w-fig-02-p-10-0.5.png}
+    \caption{The distribution of styles in the consumer population. The distribution is \(\Beta(4, 4)\). In simulations, we also use the distributions \(\Beta(2, 5)\) and \(\Beta(5, 2)\) to simulate the assymetri style distributions.}
+    \label{fig:probbuyd}
+  \end{subfigure}
+  
+  \captionsetup{margin=10pt,font=small,labelfont=bf,width=.8\textwidth}
+
+  \caption[Distributions of reservation prices and styles]{In all numerical calculations and simulations, we use two types of distributions. The gamma distribution for the distribution of reservation prices and the beta distribution for the distribution of styles. \textit{Source:} own calculations}\label{fig:probbuy}
+\end{figure}
+
+% discussion for the above figure
+Figure~\ref{fig:probbuy} shows the distribution of the random variable \(\buy\) under various values of the price \(p\) and the style \(o\). 
+
+\paragraph{A model of a firm.}
+
+A single firm supplies one product to the market. The firm chooses two decision variables: a price $p \geq 0$ and a product characteristic (style) $ s \in [0,1]$. For convenience, to indicate the expected profit of a single firm offering a good at price $p$ and with the style $o$, we assume that the cost function $c(x)=c \cdot x$, and $c>0$. Therefore, the cost function is linear. The expected profit of a firm is then the following:
 \[
 \begin{aligned}
 	\mathbb{E}(\text{profit})
 	&= \mathbb{E}\!\big(p \cdot \text{demand} - c(\text{demand})\big) \\
 	&= \mathbb{E}\!\big(p \cdot \text{demand} - c \cdot \text{demand}\big) \\
-	&= \mathbb{E}\!\big(p \cdot N \cdot \mathcal{P} - c \cdot N \cdot \mathcal{P}\big) \\
-	&= \mathbb{E}\!\big((p - c)\cdot N \cdot \mathcal{P}\big) \\
-	&= (p - c)\cdot N \cdot \mathbb{E}(\mathcal{P}),
+	&= \mathbb{E}\!\big(p \cdot N \cdot \buy - c \cdot N \cdot \buy\big) \\
+	&= \mathbb{E}\!\big((p - c)\cdot N \cdot \buy\big) \\
+	&= (p - c)\cdot N \cdot \mathbb{E}(\buy),
 \end{aligned}
 \]
 where
 \[
 \begin{aligned}
-	\mathbb{E}(\mathcal{P})
+	\mathbb{E}(\buy)
 	&= \mathbb{E}\!\left(
 	\frac{\exp\!\left(-\alpha \frac{p}{R} - \beta (S - o)^2\right)}
 	{1 + \exp\!\left(-\alpha \frac{p}{R} - \beta (S - o)^2\right)}
@@ -309,22 +362,36 @@ where
 \end{aligned}
 \]
 
-Thus, the expected profit function generalizes the dilemma faced by a company: raising prices increases profit per unit of output, but reduces demand by decreasing the probability of buying.
-Since the expected buying probability is determined by a multivariate integral, the optimization problem cannot be solved analytically. Instead, it is approached numerically using a learning algorithm that simulates the firm's behavior under conditions of incomplete information:
+Thus, the expected profit function generalizes the dilemma faced by a company: raising prices increases profit per unit of output, but reduces demand by decreasing the probability of buying. Since the expected buying probability is determined by a multivariate integral, the optimization problem cannot be solved analytically. Instead, it is approached numerically using a learning algorithm that simulates the firm's behavior while solving the following maximization problem:
 \[
 \max_{\substack{p \ge 0 \\ o \in [0,1]}}
 \; \Pi(p,o)
-= (p - c)\, N\, \mathbb{E}\!\left[\mathcal{P}(p,o)\right].
+= \max_{\substack{p \ge 0 \\ o \in [0,1]}}
+\; (p - c)\, N\, \mathbb{E}\!\left(\buy(p,o)\right).
 \]
 
-\subsubsection{Algorithm for a firm}
+% here we need to solve numerically the above maximization problem. It has nothing to do with the algorithm of a firm.
+\begin{figure}[hbt]
+  \centering
 
-In the model, the firm does not have full knowledge of its demand function, but adopts an algorithmic perspective driven by market outcomes and thus learns from what happens there. The firm follows a repeated five-step procedure:
-\begin{enumerate}
-	\item Drawing $(R_i, S_i)$ from their respective distributions creates a population of consumers. This population remains fixed throughout the analysis.
+    \includegraphics[width=.75\textwidth]{./figs/w-profits.png}
+
+  \captionsetup{margin=10pt,font=small,labelfont=bf,width=.8\textwidth}
+
+  \caption[Expected profits]{Expected profits of a firm; the figure shows behavior in two distinct situations. The top one is when the style of the product is exactly matched to the average style of the population. The lower curve shows behavior when the style is not aligned with the population's average style. In both situations, there is a unique price that maximizes profit. \textit{Source:} own calculations}\label{fig:profit}
+\end{figure}
+
+% discussion of a figure showing the expected profit curves
+
+
+%%% MR: this part needs to be rewritten from scratch so that it is more precise.
+\paragraph{Algorithm for a firm.}
+
+In the model, the firm lacks full knowledge of its demand function but adopts an algorithmic perspective driven by market outcomes, thereby learning from what happens there. The firm follows a repeated five-step procedure:
+\begin{enumerate}[noitemsep]
 	\item The firm selects initial values for price $p$ and product characteristic $o$.
 	\item Given $(p,o)$, each consumer makes a purchase decision according to the probabilistic rule defined by the utility function.
-	\item The firm observes aggregate demand and computes realized (or expected) profit.
+	\item The firm observes aggregate demand and computes realized profit.
 	\item By comparing current profit with profits obtained under small alternative changes, the firm adjusts either price or product characteristic. The firm adopts the change that improves profit and repeats the process.
 \end{enumerate}
 
