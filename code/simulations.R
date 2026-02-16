@@ -507,3 +507,79 @@ plot(resTaste2$mean_S, resTaste2$o1_star, pch=16,
 )
 points(resTaste2$mean_S, resTaste2$o2_star, pch=16)
 dev.off()
+
+### PATHS
+
+run1 <- learn_1firm(agents,
+                    p0=5, o0=0.5,
+                    alpha=1, beta=1, c_mc=0.5,
+                    dp=0.01, do=0.001,
+                    p_max=20, T=5000)
+
+h1 <- run1$history
+
+# Directory for figures (change if you want)
+dir.create("figures", showWarnings = FALSE)
+
+# (A) Price path
+png("path_single_price.png", width=1300, height=900, res=300)
+par(mar=c(4,4,1,1))
+plot(h1$t, h1$p, type="l",
+     xlab="Iteration t", ylab="Price p_t")
+dev.off()
+
+# (B) Style path
+png("path_single_style.png", width=1300, height=900, res=300)
+par(mar=c(4,4,1,1))
+plot(h1$t, h1$o, type="l",
+     xlab="Iteration t", ylab="Product characteristic o_t")
+dev.off()
+
+# (C) Profit path
+png("path_single_profit.png", width=1300, height=900, res=300)
+par(mar=c(4,4,1,1))
+plot(h1$t, h1$profit, type="l",
+     xlab="Iteration t", ylab="Expected profit Π_t")
+dev.off()
+
+### PATHS 2 FIRMS
+
+run2 <- learn_2firm(agents,
+                    p10=5, o10=0.2,
+                    p20=5.2, o20=0.8,
+                    alpha=1, beta=1,
+                    c1=0.5, c2=0.5,
+                    dp=0.01, do=0.01,
+                    p_max=20, T=5000)
+
+h2 <- run2$history
+
+# (A) Prices path (both firms)
+png("path_duopoly_prices.png", width=1300, height=900, res=300)
+par(mar=c(4,4,1,1))
+plot(h2$t, h2$p1, type="l",
+     xlab="Iteration t", ylab="Price",
+     ylim=range(c(h2$p1,h2$p2)))
+lines(h2$t, h2$p2, type="l", lty=2)
+legend("topright", legend=c("Firm 1", "Firm 2"), lty=c(1,2), bty="n")
+dev.off()
+
+# (B) Styles path (both firms)
+png("path_duopoly_styles.png", width=1300, height=900, res=300)
+par(mar=c(4,4,1,1))
+plot(h2$t, h2$o1, type="l",
+     xlab="Iteration t", ylab="Product characteristic",
+     ylim=range(c(h2$o1,h2$o2)))
+lines(h2$t, h2$o2, type="l", lty=2)
+legend("topright", legend=c("Firm 1", "Firm 2"), lty=c(1,2), bty="n")
+dev.off()
+
+# (C) Profit paths (both firms)
+png("path_duopoly_profits.png", width=1300, height=900, res=300)
+par(mar=c(4,4,1,1))
+plot(h2$t, h2$pi1, type="l",
+     xlab="Iteration t", ylab="Expected profit",
+     ylim=range(c(h2$pi1,h2$pi2)))
+lines(h2$t, h2$pi2, type="l", lty=2)
+legend("topright", legend=c("Firm 1", "Firm 2"), lty=c(1,2), bty="n")
+dev.off()
