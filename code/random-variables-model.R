@@ -12,8 +12,6 @@ simulate_market <- function(N, p1, p2, o1, o2,
   # logit indices
   z1 <- -alpha * (p1 / R) - beta * (S - o1)^2
   z2 <- -alpha * (p2 / R) - beta * (S - o2)^2
-  
-  # Stable softmax with outside option utility 0
   m  <- pmax(0, z1, z2)
   e0 <- exp(0  - m)
   e1 <- exp(z1 - m)

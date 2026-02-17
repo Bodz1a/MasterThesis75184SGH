@@ -231,10 +231,3 @@ write.csv(results, file_name, row.names = FALSE)
 ##   col = 1:2, bty = "n")
 
 ## dev.off()
-
-############################################################
-# Further possible actions:
-# - analyze the trajectory of prices/profits (do they converge, fluctuate, etc.)
-# - change parameters such as alpha_dist, gamma_price, price step, costs, etc.
-# - save results to a file, plot averaged trajectories over many runs
-############################################################

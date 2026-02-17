@@ -503,6 +503,7 @@ png("fig_taste_duopoly.png", width=1300, height=900, res=300)
 par(mar=c(4,4,2,1))
 plot(resTaste2$mean_S, resTaste2$o1_star, pch=16,
      xlab="E[S]", ylab="Learned o1* (firm 1)",
+     abline(a=0, b=1, lty=2, col="black", lwd=2)
     # main="Duopoly: firm positions shift with taste distribution")
 )
 points(resTaste2$mean_S, resTaste2$o2_star, pch=16)
@@ -513,7 +514,7 @@ dev.off()
 run1 <- learn_1firm(agents,
                     p0=5, o0=0.5,
                     alpha=1, beta=1, c_mc=0.5,
-                    dp=0.01, do=0.001,
+                    dp=0.01, do=0.01,
                     p_max=20, T=5000)
 
 h1 <- run1$history
