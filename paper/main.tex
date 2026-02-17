@@ -539,7 +539,7 @@ In the numerical implementation, the expected buying probabilities, which are gi
 =
 \frac{1}{N}
 \sum_{i=1}^{N}
-P(R_i, S_i; p, o).
+P(r_i, s_i; p, o).
 \]
 
 \paragraph{Numerical representation of firm.}
@@ -579,15 +579,15 @@ Local search procedure is constructed in such way, that at iteration $t$, given 
 
 For price:
 \[
-p_t' \in \{p_t - \Delta p,\; p_t,\; p_t + \Delta p\}.
+p_t \in \{p_t - \Delta p,\; p_t,\; p_t + \Delta p\}.
 \]
 
 For product characteristic:
 \[
-o_t' \in \{o_t - \Delta o,\; o_t,\; o_t + \Delta o\}.
+o_t \in \{o_t - \Delta o,\; o_t,\; o_t + \Delta o\}.
 \]
 
-For each candidate pair \((p', o')\), profit 
+For each candidate pair \((p, o)\), profit 
 \(\widehat{\pi}(p', o')\) is computed.
 
 The firm then updates its decision according to:
@@ -596,13 +596,6 @@ The firm then updates its decision according to:
 =
 \arg\max_{(p',o')}
 \widehat{\pi}(p', o').
-\]
-
-Boundary conditions are imposed to ensure:
-\[
-p_{t+1} \ge 0,
-\qquad
-o_{t+1} \in [0,1].
 \]
 
 The process is repeated for a fixed number of iterations $T$. Convergence is assessed by examining whether decision variables fluctuate within a narrow range and whether profit stabilizes. Because the algorithm is based on local improvements, it converges to a neighborhood of a local maximum of the profit function.
@@ -616,7 +609,7 @@ u_{1,i}, \qquad u_{2,i}, \qquad u_{0,i} = 0.
 
 Choice probabilities are given by:
 \[
-P_{j,i}
+\buy_{j,i}
 =
 \frac{\exp\!\big(u_{j,i}\big)}
 {1 + \exp\!\big(u_{1,i}\big) + \exp\!\big(u_{2,i}\big)},
@@ -627,7 +620,7 @@ Expected demand for firm \(j\) is:
 \[
 \widehat{Q}_j
 =
-\sum_{i=1}^{N} P_{j,i}.
+\sum_{i=1}^{N} \buy_{j,i}.
 \]
 
 Profit is:
@@ -674,16 +667,16 @@ Initial parameters include:
 
 The numerical analysis consists of six experiments designed to validate convergence of the learning algorithm and study comparative statics with respect to economically meaningful parameters.
 
-\begin{itemize}
-	\item \textbf{E1 (Single firm: price sensitivity)}: Vary $\alpha$ while holding other parameters fixed, to quantify how pricing power changes with consumer price sensitivity.
-	\item \textbf{E2 (Single firm: taste mismatch)}: Vary $\beta$ under a symmetric taste distribution, to study how mismatch costs affect demand and the optimal product characteristic.
-	\item \textbf{E3 (Stability to initial conditions)}: Vary initial values $(p_0,o_0)$ to verify that the algorithm converges to the same equilibrium from different starting points.
+\begin{itemize}[noitemsep]
+	\item \textbf{E1 (Single firm: price sensitivity)}: Varying $\alpha$ while holding other parameters fixed, to quantify how pricing power changes with consumer price sensitivity.
+	\item \textbf{E2 (Single firm: taste mismatch)}: Varying $\beta$ under a symmetric taste distribution, to study how mismatch costs affect demand and the optimal product characteristic.
+	\item \textbf{E3 (Stability to initial conditions)}: Varying initial values $(p_0,o_0)$ to verify that the algorithm converges to the same equilibrium from different starting points.
 	\item \textbf{E4 (Monopoly vs duopoly)}: Compare the single-firm benchmark with the duopoly model to identify competition effects on prices, profits, and market participation.
-	\item \textbf{E5 (Duopoly: differentiation test)}: Vary $\beta$ and initial positions $(o_{1,0},o_{2,0})$ to test whether competition generates endogenous differentiation.
-	\item \textbf{E6 (Asymmetric tastes)}: Replace the symmetric taste distribution with skewed Beta distributions to examine how equilibrium product style responds to demand asymmetry.
+	\item \textbf{E5 (Duopoly: differentiation test)}: Varying $\beta$ and initial positions $(o_{1,0},o_{2,0})$ to test whether competition generates endogenous differentiation.
+	\item \textbf{E6 (Asymmetric tastes)}: Replacing the symmetric taste distribution with skewed Beta distributions to examine how equilibrium product style responds to demand asymmetry.
 \end{itemize}
 
-In the thesis, we report E1, E4, E6, and the key differentiation outcome from E5, since these provide the most informative comparative statics and the clearest economic mechanisms. Experiments E2 and E3 are primarily validation and robustness checks: E2 confirms that under symmetric tastes the optimal product characteristic remains at the center of demand, while E3 confirms that equilibrium outcomes are stable with respect to initial conditions. The detailed robustness tables for E2 and E3 are summarized in the text.
+In the thesis, we report E1, E4, E6, and the key differentiation outcome from E5, since these provide the most informative comparative statics and the clearest economic mechanisms. Experiments E2 and E3 are primarily validation and robustness checks.
 
 
 \subsection{Simulations for a single firm}
