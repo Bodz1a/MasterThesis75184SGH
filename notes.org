@@ -10,18 +10,7 @@
 ** DONE Mathematical models
 *** DONE A model with a single firm
 *** DONE A model with two firms
-** TODO Implementation of mathematical models
-
-1. Rewrite the notation so that it's the same as in the previous chapter.
-2. Change subsections to paragraphs.
-3. Correct formatting issues.
-
-** TODO Simulation results
-
-1. Correct formatting issues. This includes lists but also captions and titles, so captions for figures and titles for tables.
-2. Can I see the paths for prices and styles?
-
-** TODO Conclusions
-
-1. Check the language. 
+** DONE Implementation of mathematical models
+** DONE Simulation results
+** DONE Conclusions
 

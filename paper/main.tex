@@ -134,8 +134,11 @@
 \newcommand{\setn}{\mathbb{N}}
 \newcommand{\Beta}{\mathrm{Beta}}
 \newcommand{\prob}[1]{\mathbb{P}\left( #1\right)}
-\newcommand{\buy}{{\cal B}}
+\newcommand{\buy}{{B}}
+\newcommand{\buyr}{{b}}
 \newcommand{\mean}[1]{\mathbb{E} \left( #1 \right)}
+\DeclareMathOperator*{\argmax}{argmax}
+
 
 % ---------------------------------------------------------------------
 \begin{document}
@@ -235,7 +238,7 @@ The development of digital technologies has led to a qualitative change in the u
 
 % --- chapter ---------------------------------------------------------
 \clearpage
-\section{Mathematical models}
+\section{Mathematical models}\label{sec-math-models}
 
 Here, we give a mathematical formulation of all models, but also for every model, we numerically solve the model for some selected values of exogenous parameters. We need to make those variables exactly the same as the one we take for simulations so that we can compare the results.
 
@@ -291,12 +294,12 @@ And the probability of not buying is given by the following formula:
 \prob{\text{not buy}} = 1 - \frac{\exp\!\big(u\big)}{1 + \exp\!\big(u\big)}
 \]
 In fact, the above probabilities are random variables. In particular, when a single consumer is drawn from the population at random, the probability of buying is a random variable $\buy$ that reads:
-\[
+\begin{equation}\label{eq-agent-prob-1}
 \buy = \prob{\text{buy}}
 = \frac{\exp(U)}{1 + \exp(U)}
 = \frac{\exp\!\left(-\alpha \frac{p}{R} - \beta (S - o)^2\right)}
 {1 + \exp\!\left(-\alpha \frac{p}{R} - \beta (S - o)^2\right)}.
-\]
+\end{equation}
 
 The above formulation follows the rational choice theory, in essence stating that the agents with higher utility are more likely to buy a product. However, it also introduces stochastic elements that model irrational aspects of decision-making, given that the firm does not know a particular agent's reservation price or preferred style precisely.
 
@@ -439,20 +442,20 @@ U_2(R, S, p_2, o_2) &= -\alpha \; \frac{p_2}{R} - \beta (S - o_2)^2, \\
 \]
 
 Agents choose among alternatives: not buying at all, buying from firm 1, or buying from firm 2. Again, we use a multinomial logit rule to model the buying probabilities. For an agent defined by values $(r,s)$ the probability of purchasing from firm $j \in \{1,2\}$ is:
-\[
+\begin{equation}\label{eq-agent-prob-2}
 \buy_{j} = \prob{\text{buy from firm}\; j} =
 \frac{\exp\!\big(U_j(R, S, p_j, o_j)\big)}
 {1 + \exp\!\big(U_1(R, S, p_1, o_1)\big)
-	+ \exp\!\big(U_2(R, S, p_2, o_2)\big)}.
-\]
-The probability of not buying is:
-\[
+	+ \exp\!\big(U_2(R, S, p_2, o_2)\big)},
+\end{equation}
+and the probability of not buying is:
+\begin{equation}\label{eq-agent-prob-3}
 \buy_0 = \prob{\text{not buying}} 
 =
 \frac{1}
 {1 + \exp\!\big(U_1(R, S, p_1, o_1)\big)
 	+ \exp\!\big(U_2(R,S, p_2, o_2)\big)}.
-\]
+\end{equation}
 
 Therefore, by construction, $\buy_0 + \buy_1 + \buy_2 = 1$ for all $(r,s)$. In fact, we can think of \(\buy\) as a three-dimensional random variable giving values in the simplex. As is usual, we can take an orthogonal projection and restrict ourselfs only to two dimensions. 
 
@@ -513,7 +516,7 @@ This is an approximation of iterated best-response dynamics. Over time, strategi
 
 In this chapter, computational implementation of the proposed mathematical models is described. The theoretical framework of consumer behavior, demand, and firm profit definitions assumes a continuous formulation and therefore, the expressions produced are not necessarily closed-form. Specifically, expected demand is a multidimensional integral expressed over heterogeneous consumer characteristics, and the optimization problems of the firms cannot be solved analytically. 
 
-Hence the model is implemented numerically. This chapter describes the representation of agents numerically, demand and profit approximation, and computational modeling of firm behavior using an iterative algorithm.
+Hence, the model is implemented numerically. This chapter describes the representation of agents numerically, demand and profit approximation, and computational modeling of firm behavior using an iterative algorithm.
 
 The implementation requires specification of:
 \begin{itemize}[noitemsep]
@@ -528,127 +531,57 @@ The implementation requires specification of:
 These parameters influence the smoothness of the profit function, the speed of convergence, and the precision of numerical approximations.
 
 \paragraph{Numerical representation of agents.}
-The theoretical model works on the basis of a continuum of heterogeneous consumers composed of random variables $R$ and $S$, and in our computational representation this continuum is approximated by a finite population of size $N$.
 
-Each pair $(r_i,s_i)$ is independently drawn from the given distributions for reservation prices and tastes. The population is generated once at the start of the simulation and remains fixed throughout the analysis.
+% definition of an agent
+The theoretical model is based on a continuum of heterogeneous consumers described by random variables $R$ and $S$, and in our computational representation, this continuum is approximated by a finite population of size $N$. Each agent \(i\) is repsented by the individual numbers \((r_{i}, s_{i})\) and the general parameters \(\alpha\) and \(\beta\). Each pair $(r_i,s_i)$ is independently drawn from the given distributions for reservation prices and tastes. The population is generated once at the start of the simulation and remains fixed throughout the analysis.
 
-In the numerical implementation, the expected buying probabilities, which are given by integrals in the theoretical model, are approximated by sample averages over the simulated population. It replaces continuous integration with finite summation and allows the expected demand and profit functions to be evaluated efficiently for any candidate decision variables.
-
-\[
-\widehat{\mathbb{E}}\!\left[P(p,o)\right]
-=
-\frac{1}{N}
-\sum_{i=1}^{N}
-P(r_i, s_i; p, o).
-\]
+% how an agent works
+An agent works in a simple way. Each agent at time \(t\) receive the price \(p_t\) and the style \(o_t\). Given these values, the general parameters \(\alpha\) and \(\beta\), and individual values \(r_{i}\) and \(s_{i}\), the agent calculates the utility and the probability of buying using the formula \eqref{eq-agent-prob-1} for a single firm market and formulas \eqref{eq-agent-prob-2}--\eqref{eq-agent-prob-3} in a duopoly. Based on these probabilities, the agent randomly chooses whether to buy and, if so, from which firm. Let \(\buyr_i\) be the realization of the random variable \(\buy_i\), in the single-firm market. The demand that is observed by a firm is then \(Q = \sum_i \buyr_{i}\). In the duopoly, let \(\buyr_{i j}\) is the realization of the random variable \(\buy_{i}\). The demand observed by the \(j\)-th firm is then \(Q_{j} = \sum_{i} \buyr_{i j}\). In the above formulas, we skipped the time notation for simplicity. 
 
 \paragraph{Numerical representation of firm.}
-The purchase probabilities for each consumer $i$ and given firm decisions $(p,o)$ are computed deterministically for all consumers in the population, while total demand is approximated as the sum of individual purchase probabilities:
 
+% the payoff of the firm
+Once the firm observes its demand, it can calculate the profit as \(\pi = (p - c) \cdot Q\). In the case of a duopoly, each firm can observe its profit as \(\pi_{j} = (p_{j} - c_{j}) \cdot Q_{j}\). These are the only pieces of information that firms can use in order to make decisions about the choices regarding prices and styles. Again, as in the previous case, we skipped the time notation for simplicity. Summing up, a firm is represented by three numbers: the cost \(c\) (exogenous variable), the price \(p\). and the style \(o\) (endogenous variables). There are two additional variables \(\delta_{p}\) and \(\delta_{o}\) that are related to the search mechanism described in section \ref{sec-math-models}. All exogenous variables, e.g., the costs, the steps \(\delta_{p}\) and \(\delta_{o}\), are decided at the beginning of the simulation and kept fixed throughout the whole simulation. 
+
+
+\paragraph{Implementation of a search algorithm.}
+
+% local search grid
+The firm’s optimization problem is solved using an iterative local improvement algorithm rather than direct analytical maximization. Local search procedure is constructed in such a way that at iteration $t$, given $(p_t, o_t)$, the firm evaluates candidate adjustments. These local adjustments create a local search grid that, for price, reads:
 \[
-\widehat{Q}(p,o)
-=
-\sum_{i=1}^{N} P_i(p,o).
+p_t \in G_{p} = \{p_t - \delta_{p},\; p_t,\; p_t + \delta_{p}\},
+\]
+and for the product characteristic:
+\[
+o_t \in G_{o} = \{o_t - \delta_{o},\; o_t,\; o_t + \delta_{o}\}.
 \]
 
-This formulation corresponds to the expected number of purchases over multiple sales periods. It avoids the additional randomness that arises in binary purchase simulations and provides a smooth profit function.
-
-The profit is computed by the function:
-
-\[
-\widehat{\pi}(p,o)
-=
-(p - c)\, \widehat{Q}(p,o).
-\]
-
-Therefore, the profit can be evaluated for any candidate price and product characteristic and forms the basis for the firm’s decision-making algorithm.
-
-\paragraph{Implementation of a single-firm algorithm.}
-
-The firm’s optimization problem is solved using an iterative local improvement algorithm rather than direct analytical maximization. It is initialized by the following procedure:
-
-\begin{enumerate}[noitemsep]
-	\item Generate a consumer population.
-	
-	\item Select initial values $p_0$ and $o_0$.
-	
-	\item Choose step sizes $\delta_p$ and $\delta_o$.
-\end{enumerate}
-
-Local search procedure is constructed in such way, that at iteration $t$, given $(p_t, o_t)$, the firm evaluates candidate adjustments.
-
-For price:
-\[
-p_t \in \{p_t - \Delta p,\; p_t,\; p_t + \Delta p\}.
-\]
-
-For product characteristic:
-\[
-o_t \in \{o_t - \Delta o,\; o_t,\; o_t + \Delta o\}.
-\]
-
-For each candidate pair \((p, o)\), profit 
-\(\widehat{\pi}(p, o)\) is computed.
-
-The firm then updates its decision according to:
+% decision of a firm
+At each step \(t\), the firm randomly selects the variable over which to optimize. If the price is selected, then the new price is calculated as
 \[
 (p_{t+1}, o_{t+1})
-=
-\arg\max_{(p,o)}
-\widehat{\pi}(p, o).
+= (\argmax_{p \in G_{p}} \pi(p, o_t), o_t). 
 \]
-
-The process is repeated for a fixed number of iterations $T$. Convergence is assessed by examining whether decision variables fluctuate within a narrow range and whether profit stabilizes. Because the algorithm is based on local improvements, it converges to a neighborhood of a local maximum of the profit function.
-
-\paragraph{Implementation of a two-firm algorithm.}
-
-In the duopoly extension, for each consumer \(i\), utilities are computed:
+If the style is selected, then the new style is calculated as
 \[
-u_{1,i}, \qquad u_{2,i}, \qquad u_{0,i} = 0.
+(p_{t+1}, o_{t+1})
+= (p_t, \argmax_{o \in G_{o}} \pi(p_t, o)). 
 \]
 
-Choice probabilities are given by:
-\[
-\buy_{j,i}
-=
-\frac{\exp\!\big(u_{j,i}\big)}
-{1 + \exp\!\big(u_{1,i}\big) + \exp\!\big(u_{2,i}\big)},
-\qquad j = 1,2.
-\]
+% remark about the duopoly
+In the case of a two-firm market, the algorithm is exactly the same. The only difference is that at each step, both firms are making decisions. So, the procedure looks like this. First, the first firm is deciding whether to optimize over prices or styles. It does the maximization. Then the second firm repeats the procedure.
 
-Expected demand for firm \(j\) is:
-\[
-\widehat{Q}_j
-=
-\sum_{i=1}^{N} \buy_{j,i}.
-\]
+% convergence
+The process is repeated for a fixed number of iterations $T$. Convergence is assessed by examining whether decision variables fluctuate within a narrow range and whether profit stabilizes. Because the algorithm is based on local improvements and the profit function is concave, it converges to a neighborhood of a local maximum of the profit function. In the two-firm scenario, the process may not converge, depending on many conditions. For example, a suitable values of the steps \(\delta_{p}\) and \(\delta_{o}\). If the process converges, the resulting profile can be interpreted as the approximate Nash equilibrium.
 
-Profit is:
-\[
-\widehat{\pi}_j
-=
-(p_j - c_j)\, \widehat{Q}_j.
-\]
-
-Each firm applies a local search procedure similar to the single-firm case. At each iteration:
-
-\begin{enumerate}[noitemsep]
-	\item Given current competitor strategies, a firm evaluates small candidate adjustments to its own price or product characteristic.
-	\item Profit is computed using the deterministic demand approximation.
-	\item The firm adopts the candidate that yields the highest profit.
-\end{enumerate}
-
-Firms update sequentially or alternately, generating a dynamic process in strategy space. Under suitable conditions, the process converges to a stable strategy profile that can be interpreted as an approximate Nash equilibrium.
 % --- chapter ---------------------------------------------------------
 \clearpage
 \section{Simulation results}
 
-%We show the results of simulations for various initial and exogenous parameters. 
-In this section, the numerical results of the mathematical models developed in the previous chapters are presented.
+% We show the results of simulations for various initial and exogenous parameters. 
+In this section, the numerical results of the mathematical models developed in the previous chapters are presented. We do this by first ensuring that the learning algorithm converges to stable equilibrium outcomes and that the outcome is robust to different initial conditions. Second, we make comparative statics about basic structural parameters that have been included in the model. Thirdly, we study how competition between the firms has impact on the pricing and product design decisions.
 
-We do this by first ensuring that the learning algorithm converges to stable equilibrium outcomes and that the outcome is robust to different initial conditions. Second, we make comparative statics about basic structural parameters that have been included in the model. Thirdly, we study how competition between the firms has impact on the pricing and product design decisions.
-
-The population size during the simulations is fixed at $N=5000$. For the purpose of comparability, consumer characteristics are observed similarly across the experiments except when specified otherwise. With this, differences in outcomes can only be ascribed to changes in parameters and not sampling variability. The study differentiates between initial parameters (the data that constitutes initial values in which the learning process is performed) and exogenous parameters (the economic environment with which it operates).
+The population size during the simulations is fixed at $N=5000$. For the purpose of comparability, consumer characteristics (reservation prices and styles) are were kept fixed across the experiments except when specified otherwise. With this, differences in outcomes can only be ascribed to changes in parameters and not sampling variability. The study differentiates between initial parameters (the data that constitutes initial values in which the learning process is performed) and exogenous parameters (the economic environment with which it operates).
 Exogenous parameters include:
 \begin{itemize}[noitemsep]
 	\item $\alpha$: price sensitivity of consumers,
@@ -668,7 +601,7 @@ Initial parameters include:
 The numerical analysis consists of six experiments designed to validate convergence of the learning algorithm and study comparative statics with respect to economically meaningful parameters.
 
 \begin{itemize}[noitemsep]
-	\item \textbf{E1 (Single firm: price sensitivity)}: Varying $\alpha$ while holding other parameters fixed, to quantify how pricing power changes with consumer price sensitivity.
+	\item \textbf{E1 (Single firm: price sensitivity)}: Varying $\alpha$ while holding other parameters fixed, to quantify how pricing changes with consumer price sensitivity (or, saying differently, with reservation prices).
 	\item \textbf{E2 (Single firm: taste mismatch)}: Varying $\beta$ under a symmetric taste distribution, to study how mismatch costs affect demand and the optimal product characteristic.
 	\item \textbf{E3 (Stability to initial conditions)}: Varying initial values $(p_0,o_0)$ to verify that the algorithm converges to the same equilibrium from different starting points.
 	\item \textbf{E4 (Monopoly vs duopoly)}: Compare the single-firm benchmark with the duopoly model to identify competition effects on prices, profits, and market participation.
@@ -746,7 +679,7 @@ The drop in profits is natural in economic point of view. Higher $\alpha$ means 
 
 \paragraph{Effect of taste distribution.}
 
-We next vary the distribution of consumer tastes while keeping $\alpha = 1$, $\beta = 1$, and $c = 0.5$ fixed. Three distributions are considered: $\text{Beta}(2,5)$, $\text{Beta}(4,4)$, and $\text{Beta}(5,2)$.
+We next vary the distribution of consumer tastes while keeping $\alpha = 1$, $\beta = 1$, and $c = 0.5$ fixed. Three distributions are considered: $\Beta(2,5)$, $\Beta(4,4)$, and $\Beta(5,2)$.
 
 \begin{table}[H]
 	\centering
@@ -777,11 +710,13 @@ We next vary the distribution of consumer tastes while keeping $\alpha = 1$, $\b
 \end{figure}
 The optimal product characteristic closely follows the mean of the taste distribution, $o^* \approx \mathbb{E}[S]$. This confirms that product design is driven by the center of consumer demand.
 
-When tastes are skewed toward lower values (Beta(2,5)), the firm shifts its product toward the left side of the characteristic space. When tastes are skewed toward higher values (Beta(5,2)), the firm shifts accordingly to the right.
+When tastes are skewed toward lower values ($\Beta(2,5)$), the firm shifts its product toward the left side of the characteristic space. When tastes are skewed toward higher values ($\Beta(5,2)$), the firm shifts accordingly to the right.
 
 This result confirms that the model generates economically intuitive behavior: the firm designs its product to align with the center of consumer demand. Importantly, price remains largely unchanged in this experiment, indicating that horizontal demand asymmetry primarily affects product design rather than pricing incentives.
 
 \subsection{Simulations for two firms}
+
+We generalize the analysis to a duopoly. Each firm learns independently. That is, they do not account for a second firm in the market, relying only on realized profits. Under suitable conditions, this process converges to the equilibrium. Figure~\ref{fig:two} shows a typical behavior of the price paths and the style paths. For symmetric firms, the prices converge to the same value. Also, both firms can successfully learn the average style in the population. 
 
 \begin{figure}[hbt]
 	\centering
@@ -802,11 +737,10 @@ This result confirms that the model generates economically intuitive behavior: t
 	\caption[Time path of two firms]{Firms adjust strategies in response to each other until a stationary outcome is reached, approximating a Nash equilibrium. \textit{Source:} own calculations}\label{fig:two}
 \end{figure}
 
-We generalize the analysis to a duopoly. Each firm uniquely implements the learning algorithm, and the competitor's current approach is treated as given to them; both use it independently. The dynamic process as a result converges to a stable strategy profile.
 
 \paragraph{Monopoly against Duopoly.}
 
-We begin by comparing monopoly and duopoly outcomes under identical structural parameters, which are $\alpha = 1$, $\beta = 1$, and $c_1 = c_2 = 0.5$.
+We begin by comparing monopoly and duopoly outcomes under identical structural parameters, which are $\alpha = 1$, $\beta = 1$, and $c_1 = c_2 = 0.5$. Table~\ref{tab:monopoly_duopoly} shows the comaprison between the monopoly and the duopoly models as far as the equilibrium is concerned. The additional information is that the total duopoly profit equals 7168.78 in comparison to 4404.33 in the monopoly. The outside option in the duopoly share is approximately 0.704.
 
 \begin{table}[H]
 	\centering
@@ -825,15 +759,14 @@ We begin by comparing monopoly and duopoly outcomes under identical structural p
 		\vspace*{2ex}
 		\footnotesize
 	\end{tabular}
+	
 \end{table}
 
-Total duopoly profit equals 7168.78. The outside option share is approximately 0.704.
-
-The existence of the second firm brings down equilibrium prices. This result is influenced by the competitive pressure: each of the two sides has an interest to just slightly underprice the rival to gain market share. This leads to a lower share of per-firm profit as compared to the monopoly benchmark. Curiously, both firms choose the same product attributes. In this symmetric equilibrium case, there is no endogenous differentiation despite competition. The point is hence the minimum differentiation at equilibrium. This result is consistent with the structure of multinomial logit demand under symmetric costs and preferences.
+The existence of the second firm brings down equilibrium prices. This result is influenced by the competitive pressure: each of the two sides has an interest in just slightly underpricing the rival to gain market share. This leads to a lower share of per-firm profit as compared to the monopoly benchmark. Curiously, both firms select the same product attributes. In this symmetric equilibrium case, there is no endogenous differentiation despite competition. This result is consistent with the structure of multinomial logit demand under symmetric costs and preferences.
 
 \paragraph{Taste asymmetry under competition.}
 
-Finally, we analyze how duopoly outcomes change when the distribution of agents tastes becomes asymmetric. We repeat the asymmetric taste experiment in the duopoly setting.
+Finally, we analyze how duopoly outcomes change when the distribution of agents' tastes becomes asymmetric. We repeat the asymmetric taste experiment in the duopoly setting. Table~\ref{tab:taste_duopoly} shows the results of the simulations.
 
 \begin{table}[H]
 	\centering
@@ -863,21 +796,19 @@ Finally, we analyze how duopoly outcomes change when the distribution of agents 
 	\label{fig:taste_duopoly}
 \end{figure}
 
-Both firms change the characteristics of their products when demand changes, as demonstrated by the simulations. Similar to the case of monopoly, firm positions move toward the mean of the taste distribution. But even when demand is asymmetric, firms converge to identical product characteristics. Hence, the model does not generate endogenous differentiation in equilibrium, as $o_1^* = o_2^*$ in all cases. Instead, both firms cluster at the center of consumer demand.
-
-This outcome reflects the symmetric structure of costs and the substitution patterns implied by the logit demand system.
+Both firms change the characteristics of their products when demand changes, as demonstrated by the simulations. Similar to the case of a monopoly, firm positions move toward the mean of the taste distribution. But even when demand is asymmetric, firms converge to identical product characteristics. Hence, the model does not generate endogenous differentiation in equilibrium, as $o_1^* = o_2^*$ in all cases. Instead, both firms cluster at the center of consumer demand. This is not a surprise as the distribution of tastes is unimodal. It could be different for a two-peak distribution. 
 
 % --- chapter ---------------------------------------------------------
 \clearpage
 \section{Conclusions}
 
-Within this thesis were built and simulated the mathematical model that describes firm behaviour in the presence of a heterogeneity of consumer preferences. It aimed to study the optimal prices and product characteristics that firms determine, and to analyze how those choices change under competition. 
+Within this thesis, a mathematical model was built and simulated that describes firm behaviour in the presence of a heterogeneity of consumer preferences. It aimed to study the optimal prices and product characteristics that firms determine, and to analyze how those choices change under competition. 
 
 The model consists of heterogeneous consumers with logit-based demand and profit-maximizing firms with price and product style change. Since there are no available analytical solutions, equilibrium results have been obtained by a structured numerical learning algorithm. 
 
-The simulation results provide several important conclusions. First, price sensitivity is the principal determinant of pricing power. And as consumers become more price sensitive when buying certain products, the optimal prices drop so sharply that equilibrium profits fall as well. This supports the classical relation between demand elasticity and markups. Second, product design is dictated by the distribution of market tastes. The mean of the taste distribution closely follows the optimal product feature. Asymmetric preferences make firms rearrange product style accordingly. This shows that the horizontal differentiation in the model is really driven by the demand. Third, competition lowers the price and per firm earnings compared to monopoly outcomes. Except, at symmetric costs and logit demand, the duopoly equilibrium shows minimum differentiation: firms converge on identical product features. Although demand asymmetry distorts the equilibrium location, it does not provide endogenous differentiation within this context. 
+The simulation results provide several important conclusions. First, price sensitivity is the principal determinant of pricing power. And as consumers become more price sensitive when buying certain products, the optimal prices drop so sharply that equilibrium profits fall as well. This supports the classical relation between demand elasticity and markups. Second, product design is dictated by the distribution of market tastes. The mean of the taste distribution closely follows the optimal product feature. Asymmetric preferences make firms rearrange product style accordingly. This shows that the horizontal differentiation in the model is really driven by the demand. Third, competition lowers the price and per-firm earnings compared to monopoly outcomes. Except at symmetric costs and logit demand, the duopoly equilibrium shows minimum differentiation: firms converge on identical product features. Although demand asymmetry distorts the equilibrium location, it does not provide endogenous differentiation within this context. 
 
-The simulations hold to changes in initial conditions and thus reflect stable equilibrium performance. The models also provide with an economically intuitive comparative statics that show that consumer heterogeneity influences pricing and product choices under monopoly, as well as duopoly conditions. Such insights emphasize the beneficial application of computational methods to explain certain strategic firm activity when closed-form analytical tools fail to result.
+The simulations hold to changes in initial conditions and thus reflect stable equilibrium performance. The models also provide an economically intuitive comparative statics that show that consumer heterogeneity influences pricing and product choices under monopoly, as well as duopoly conditions. Such insights emphasize the beneficial application of computational methods to explain certain strategic firm activity when closed-form analytical tools fail to result.
 
 % --- bibliography ----------------------------------------------------
 \clearpage
