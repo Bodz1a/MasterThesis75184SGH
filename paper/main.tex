@@ -588,14 +588,14 @@ o_t \in \{o_t - \Delta o,\; o_t,\; o_t + \Delta o\}.
 \]
 
 For each candidate pair \((p, o)\), profit 
-\(\widehat{\pi}(p', o')\) is computed.
+\(\widehat{\pi}(p, o)\) is computed.
 
 The firm then updates its decision according to:
 \[
 (p_{t+1}, o_{t+1})
 =
-\arg\max_{(p',o')}
-\widehat{\pi}(p', o').
+\arg\max_{(p,o)}
+\widehat{\pi}(p, o).
 \]
 
 The process is repeated for a fixed number of iterations $T$. Convergence is assessed by examining whether decision variables fluctuate within a narrow range and whether profit stabilizes. Because the algorithm is based on local improvements, it converges to a neighborhood of a local maximum of the profit function.
